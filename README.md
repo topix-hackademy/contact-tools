@@ -15,6 +15,7 @@ Create a virtualenv:
     
 Move into the root directory and install the requirements:
 
+    $ pip install fabric
     $ fab install
     
 Create DB:
