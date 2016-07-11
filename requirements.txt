@@ -1,0 +1,5 @@
+Django==1.9.7
+ecdsa==0.13
+Fabric==1.11.1
+paramiko==1.17.1
+pycrypto==2.6.1

@@ -1,3 +1,7 @@
+### Custom Ignore
+
+envContact
+
 ### Django ###
 *.log
 *.pot
