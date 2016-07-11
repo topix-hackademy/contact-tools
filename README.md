@@ -33,3 +33,4 @@ Run Server:
 Run migration for app ```contacts```:
 
     $ fab migrate_app:'contacts'
+    $ fab migrate
