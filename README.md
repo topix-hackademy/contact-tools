@@ -25,15 +25,19 @@ Create DB:
 Create SuperUser:
 
     $ fab create_superuser
-    
-Run Server:
 
-    $ fab start
-    
 Run migration for app ```contacts```:
 
     $ fab migrate_app:'contacts'
     $ fab migrate
+
+Run migration for all:
+
+    $ fab migrate_all
+    
+Run Server:
+
+    $ fab start
     
 ## Contacts APP
 

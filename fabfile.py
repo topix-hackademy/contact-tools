@@ -35,9 +35,12 @@ def migrate():
 def migrate_app(app_name):
     local('python manage.py makemigrations %s' % app_name)
 
+def migrate_all():
+    local('python manage.py migrate')
+    local('python manage.py makemigrations contacts')
+
 def create_superuser():
     local('python manage.py createsuperuser')
-
 
 def start():
     local('python manage.py runserver 0.0.0.0:8000')
