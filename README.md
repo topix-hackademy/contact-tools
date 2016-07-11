@@ -34,3 +34,9 @@ Run migration for app ```contacts```:
 
     $ fab migrate_app:'contacts'
     $ fab migrate
+    
+## Contacts APP
+
+App ```contacts``` contains all the controllers, models and urls to manage customers. The views are registered on:
+
+    http://127.0.0.1:8000/api/
