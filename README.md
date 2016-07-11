@@ -28,7 +28,7 @@ Create SuperUser:
     
 Run Server:
 
-    $ fab run
+    $ fab start
     
 Run migration for app ```contacts```:
 

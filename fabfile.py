@@ -20,7 +20,6 @@ def view_test_log():
     run('tail -f /var/log/apache2/contact-tools-error.log')
 
 
-
 ####################################
 ########### LOCAL UTILS ############
 ####################################
@@ -40,5 +39,5 @@ def create_superuser():
     local('python manage.py createsuperuser')
 
 
-def run():
+def start():
     local('python manage.py runserver 0.0.0.0:8000')
