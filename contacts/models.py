@@ -21,23 +21,17 @@ class CompanyType(models.Model):
     class Meta:
         ordering = ('type_name',)
 
-
 @python_2_unicode_compatible
-class Service(models.Model):
-
-    service_name = models.CharField('Service Name', max_length=200)
-    token = models.CharField('Token', default=create_uid, max_length=200)
+class ContactType(models.Model):
+    type_name = models.CharField('Contact Type', max_length=200)
     is_valid = models.BooleanField('Is Valid', default=True)
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
-    activation_date = models.DateTimeField('Activation Date', default=datetime.datetime.now)
-    delete_date = models.DateTimeField('Delete Date', null=True)
-    notes = models.TextField('Notes', null=True, blank=True)
 
     def __str__(self):
-        return self.service_name + " - " + self.token
+        return self.type_name
 
     class Meta:
-        ordering = ('service_name',)
+        ordering = ('type_name',)
 
 
 @python_2_unicode_compatible
@@ -80,24 +74,13 @@ class Contact(models.Model):
     contact_phone = models.CharField('Contact Phone', max_length=100, null=True, blank=True)
     contact_notes = models.TextField('Notes', null=True, blank=True)
 
+    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+
     def __str__(self):
         return self.contact_username + " - " + self.contact_email
 
     class Meta:
         ordering = ('contact_email',)
-
-
-@python_2_unicode_compatible
-class ContactType(models.Model):
-    type_name = models.CharField('Contact Type', max_length=200)
-    is_valid = models.BooleanField('Is Valid', default=True)
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
-
-    def __str__(self):
-        return self.type_name
-
-    class Meta:
-        ordering = ('type_name',)
 
 
 @python_2_unicode_compatible
@@ -107,8 +90,27 @@ class CCRelation(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
     contact_type = models.ForeignKey(ContactType, on_delete=models.CASCADE)
 
+    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+
     def __str__(self):
         return self.company.company_short_name + " - " + self.contact.contact_username \
                + " - " + self.contact_type.type_name
 
 
+@python_2_unicode_compatible
+class Service(models.Model):
+
+    service_name = models.CharField('Service Name', max_length=200, null=False, blank=False)
+    token = models.CharField('Token', default=create_uid, max_length=200, null=False, blank=False)
+    is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
+    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    activation_date = models.DateTimeField('Activation Date', default=datetime.datetime.now)
+    delete_date = models.DateTimeField('Delete Date', null=True, blank=True)
+    notes = models.TextField('Notes', null=True, blank=True)
+
+
+    def __str__(self):
+        return self.service_name + " - " + self.token
+
+    class Meta:
+        ordering = ('service_name',)
