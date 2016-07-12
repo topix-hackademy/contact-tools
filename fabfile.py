@@ -21,7 +21,7 @@ def view_test_log():
 
 
 ####################################
-########### LOCAL UTILS ############
+########### DJANGO UTILS ###########
 ####################################
 
 def install():
@@ -46,3 +46,14 @@ def create_superuser():
 
 def start():
     local('python manage.py runserver 0.0.0.0:8000')
+
+
+####################################
+########## DOCUMENTATION ###########
+####################################
+
+def start_doc():
+    local('mkdocs serve -f documentation/mkdocs.yml')
+
+def deploy_doc():
+    local('mkdocs gh-deploy --clean -f documentation/mkdocs.yml')

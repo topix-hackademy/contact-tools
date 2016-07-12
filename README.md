@@ -44,3 +44,17 @@ Run Server:
 App ```contacts``` contains all the controllers, models and urls to manage customers. The views are registered on:
 
     http://127.0.0.1:8000/api/
+
+## Documentation
+
+We provided a full documentation on Data Model and API. We are using MKDocs, here some utils.
+
+To run the local documentation from the root of the project:
+
+    fab start_doc
+    
+To deploy documentation under gh-pages on github:
+
+    fab deploy_doc
+
+[HERE](https://topix-hackademy.github.io/contact-tools/) you can find the result!

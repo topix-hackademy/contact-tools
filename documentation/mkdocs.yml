@@ -6,6 +6,8 @@ repo_url: https://github.com/topix-hackademy/contact-tools
 
 theme: material
 
+docs_dir: documentation/docs
+site_dir: documentation/site
 
 pages:
 - [index.md, Home]
