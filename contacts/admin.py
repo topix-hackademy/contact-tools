@@ -2,7 +2,7 @@ from django.contrib import admin
 import datetime
 
 ## My Models
-from .models import CompanyType, Service, Company, Contact
+from .models import CompanyType, Service, Company, Contact, ContactType
 
 ### COMPANY TYPE ADMIN
 
@@ -17,6 +17,20 @@ class CompanyTypeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(CompanyType, CompanyTypeAdmin)
+
+### CONTACT TYPE ADMIN
+
+class ContactTypeAdmin(admin.ModelAdmin):
+
+    fieldsets = [
+        ('Contact Type', {'fields': ['type_name', 'is_valid']}),
+    ]
+    list_display = ('type_name', 'is_valid', 'creation_date')
+    list_filter = ['creation_date', 'is_valid']
+    search_fields = ['type_name']
+
+
+admin.site.register(ContactType, ContactTypeAdmin)
 
 ### SERVICE ADMIN
 

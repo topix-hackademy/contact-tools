@@ -83,7 +83,21 @@ class Contact(models.Model):
     def __str__(self):
         return self.contact_username + " - " + self.contact_email
 
+    class Meta:
+        ordering = ('contact_email',)
 
+
+@python_2_unicode_compatible
+class ContactType(models.Model):
+    type_name = models.CharField('Contact Type', max_length=200)
+    is_valid = models.BooleanField('Is Valid', default=True)
+    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+
+    def __str__(self):
+        return self.type_name
+
+    class Meta:
+        ordering = ('type_name',)
 
 
 
