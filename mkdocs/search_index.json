@@ -1,0 +1,129 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to Contact-tools Documentation\n\n\nWelcome to the Contact-Tools Documentation made with love by TOP-IX Hackademy \n3.\n\n\nDocumentation Schema\n\n\nHere the structure of the documentation:\n\n\n\n\nData Model\n - Infos about the models - \nview\n\n\nAPI\n - API Documentation - \nview\n\n\n\n\nProject layout\n\n\ncontacts/           # App Folder, contains models and API\ncontacttols/        # Admin Folder, contains settings and base management of the project\ndocumentation/\n    index.md        # The documentation homepage.\n    ...             # Other markdown pages, images and other files.\nfabfile.py          # Fab File, we use python Fabric to manage the project\nrequirements.txt    # File with the project requirements", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-to-contact-tools-documentation", 
+            "text": "Welcome to the Contact-Tools Documentation made with love by TOP-IX Hackademy  3.", 
+            "title": "Welcome to Contact-tools Documentation"
+        }, 
+        {
+            "location": "/#documentation-schema", 
+            "text": "Here the structure of the documentation:   Data Model  - Infos about the models -  view  API  - API Documentation -  view", 
+            "title": "Documentation Schema"
+        }, 
+        {
+            "location": "/#project-layout", 
+            "text": "contacts/           # App Folder, contains models and API\ncontacttols/        # Admin Folder, contains settings and base management of the project\ndocumentation/\n    index.md        # The documentation homepage.\n    ...             # Other markdown pages, images and other files.\nfabfile.py          # Fab File, we use python Fabric to manage the project\nrequirements.txt    # File with the project requirements", 
+            "title": "Project layout"
+        }, 
+        {
+            "location": "/datamodel/", 
+            "text": "Data Model Documentation\n\n\nIntroduction\n\n\nWe designed to have a simple data model with this particular relations schema:\n\n\n\n\nCompany\n - \nview\n\n\nCompany Type\n - \nview\n\n\nContact\n - \nview\n\n\nContact Type\n - \nview\n\n\nContact/Company ManyToMany Relation\n - \nview\n\n\nService\n - \nview\n\n\n\n\nHere the ER Model.", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/datamodel/#data-model-documentation", 
+            "text": "", 
+            "title": "Data Model Documentation"
+        }, 
+        {
+            "location": "/datamodel/#introduction", 
+            "text": "We designed to have a simple data model with this particular relations schema:   Company  -  view  Company Type  -  view  Contact  -  view  Contact Type  -  view  Contact/Company ManyToMany Relation  -  view  Service  -  view   Here the ER Model.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/datamodel/company/", 
+            "text": "Company\n\n\nIn this model we are going to save all the list of companies. \n\n\nUsing the key \ncompany_type\n we have created a \nMany To Many Relation\n between tables Company and CompanyType.\nFor each Company we save this list of attributes:\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\ncompany_custom_id\n\n\nFalse\n\n\nINT\n\n\nUnique Custom ID\n\n\n\n\n\n\ncompany_name\n\n\nFalse\n\n\nCHAR\n\n\nName of the Company\n\n\n\n\n\n\ncompany_short_name\n\n\nFalse\n\n\nCHAR\n\n\nShort Name of the Company\n\n\n\n\n\n\ncompany_business_name\n\n\nFalse\n\n\nCHAR\n\n\nUnique Name of the Company\n\n\n\n\n\n\ncompany_vat_number\n\n\nTrue\n\n\nINT\n\n\nVAT Number\n\n\n\n\n\n\ncompany_tax_code\n\n\nTrue\n\n\nINT\n\n\nTAX Code\n\n\n\n\n\n\ncompany_address\n\n\nFalse\n\n\nCHAR\n\n\nAddress of the Company\n\n\n\n\n\n\ncompany_cap\n\n\nFalse\n\n\nCHAR\n\n\nCAP Address of the Company\n\n\n\n\n\n\ncompany_city\n\n\nFalse\n\n\nCHAR\n\n\nCity of the Company\n\n\n\n\n\n\ncompany_province\n\n\nTrue\n\n\nCHAR\n\n\nCity Province of the Company\n\n\n\n\n\n\ncompany_country\n\n\nFalse\n\n\nCHAR\n\n\nCountry of the Company\n\n\n\n\n\n\ncompany_phone_number\n\n\nTrue\n\n\nCHAR\n\n\nPhone Number of the Company\n\n\n\n\n\n\ncompany_fax\n\n\nTrue\n\n\nCHAR\n\n\nFax of the Company\n\n\n\n\n\n\ncompany_website\n\n\nTrue\n\n\nCHAR\n\n\nWebSite of the Company\n\n\n\n\n\n\ncompany_notes\n\n\nTrue\n\n\nTEXT\n\n\nNotes about the Company\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date of the Record\n\n\n\n\n\n\ncompany_type\n\n\nTrue\n\n\nCHAR\n\n\nType (ManyToMany  with CompanyType)\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nCompany\n in the Admin Area:\n\n\nclass CompanyAdmin(admin.ModelAdmin):\n    fieldsets = [\n        ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',\n                                     'company_business_name', 'company_vat_number', 'company_tax_code']}),\n        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',\n                                        'company_country']}),\n        ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),\n        ('Company Type', {'fields': ['company_type']}),\n        ('Notes', {'fields': ['company_notes']})\n    ]\n    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')\n    search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']\n\n\n\nCompany Type\n\n\nThis model is used to specify the type of each Company (Peering / Clients / ...).\nHere the attributes:\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\ntype_name\n\n\nFalse\n\n\nCHAR\n\n\nName of the type\n\n\n\n\n\n\nis_valid\n\n\nFalse\n\n\nBOOLEAN\n\n\nTRUE if the type is available\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nCompanyType\n in the Admin Area:\n\n\nclass CompanyTypeAdmin(admin.ModelAdmin):\n\n    fieldsets = [\n        ('Company Type', {'fields': ['type_name', 'is_valid']}),\n    ]\n    list_display = ('type_name', 'is_valid', 'creation_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['type_name']", 
+            "title": "Company"
+        }, 
+        {
+            "location": "/datamodel/company/#company", 
+            "text": "In this model we are going to save all the list of companies.   Using the key  company_type  we have created a  Many To Many Relation  between tables Company and CompanyType.\nFor each Company we save this list of attributes:     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      company_custom_id  False  INT  Unique Custom ID    company_name  False  CHAR  Name of the Company    company_short_name  False  CHAR  Short Name of the Company    company_business_name  False  CHAR  Unique Name of the Company    company_vat_number  True  INT  VAT Number    company_tax_code  True  INT  TAX Code    company_address  False  CHAR  Address of the Company    company_cap  False  CHAR  CAP Address of the Company    company_city  False  CHAR  City of the Company    company_province  True  CHAR  City Province of the Company    company_country  False  CHAR  Country of the Company    company_phone_number  True  CHAR  Phone Number of the Company    company_fax  True  CHAR  Fax of the Company    company_website  True  CHAR  WebSite of the Company    company_notes  True  TEXT  Notes about the Company    creation_date  False  DATETIME  Creation Date of the Record    company_type  True  CHAR  Type (ManyToMany  with CompanyType)", 
+            "title": "Company"
+        }, 
+        {
+            "location": "/datamodel/company/#code-snippet", 
+            "text": "Here the code used to Register the Admin Form for table  Company  in the Admin Area:  class CompanyAdmin(admin.ModelAdmin):\n    fieldsets = [\n        ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',\n                                     'company_business_name', 'company_vat_number', 'company_tax_code']}),\n        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',\n                                        'company_country']}),\n        ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),\n        ('Company Type', {'fields': ['company_type']}),\n        ('Notes', {'fields': ['company_notes']})\n    ]\n    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')\n    search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/datamodel/company/#company-type", 
+            "text": "This model is used to specify the type of each Company (Peering / Clients / ...).\nHere the attributes:     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      type_name  False  CHAR  Name of the type    is_valid  False  BOOLEAN  TRUE if the type is available    creation_date  False  DATETIME  Creation Date", 
+            "title": "Company Type"
+        }, 
+        {
+            "location": "/datamodel/company/#code-snippet_1", 
+            "text": "Here the code used to Register the Admin Form for table  CompanyType  in the Admin Area:  class CompanyTypeAdmin(admin.ModelAdmin):\n\n    fieldsets = [\n        ('Company Type', {'fields': ['type_name', 'is_valid']}),\n    ]\n    list_display = ('type_name', 'is_valid', 'creation_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['type_name']", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/datamodel/contact/", 
+            "text": "Contact\n\n\nIn this model we are going to save all the list of contacs. \n\n\nFor each Contact we save this list of attributes:\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\ncontact_username\n\n\nFalse\n\n\nCHAR\n\n\nUsername of the Contacts\n\n\n\n\n\n\ncontact_first_name\n\n\nTrue\n\n\nCHAR\n\n\nFirst Name of the Contacts\n\n\n\n\n\n\ncontact_last_name\n\n\nTrue\n\n\nCHAR\n\n\nLast Name of the Contacts\n\n\n\n\n\n\ncontact_email\n\n\nFalse\n\n\nEMAIL\n\n\nEmail of the Contacts\n\n\n\n\n\n\ncontact_phone\n\n\nTrue\n\n\nCHAR\n\n\nPhone Number of the Contacts\n\n\n\n\n\n\ncontact_notes\n\n\nTrue\n\n\nTEXT\n\n\nNotes about of the Contacts\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nContact\n in the Admin Area:\n\n\nclass ContactAdmin(admin.ModelAdmin):\n    fieldsets = [\n        ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),\n        ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),\n        ('Notes', {'fields': ['contact_notes']})\n    ]\n    list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')\n    search_fields = ['contact_username', 'contact_email', 'contact_last_name']\n\n\n\nContact Type\n\n\nThis model is used to specify the type of each Contact (Technical / Manager / Consultant / ...). \nHere the attributes:\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\ntype_name\n\n\nFalse\n\n\nCHAR\n\n\nName of the type\n\n\n\n\n\n\nis_valid\n\n\nFalse\n\n\nBOOLEAN\n\n\nTRUE if the type is available\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nContactType\n in the Admin Area:\n\n\nclass ContactTypeAdmin(admin.ModelAdmin):\n\n    fieldsets = [\n        ('Contact Type', {'fields': ['type_name', 'is_valid']}),\n    ]\n    list_display = ('type_name', 'is_valid', 'creation_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['type_name']", 
+            "title": "Contact"
+        }, 
+        {
+            "location": "/datamodel/contact/#contact", 
+            "text": "In this model we are going to save all the list of contacs.   For each Contact we save this list of attributes:     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      contact_username  False  CHAR  Username of the Contacts    contact_first_name  True  CHAR  First Name of the Contacts    contact_last_name  True  CHAR  Last Name of the Contacts    contact_email  False  EMAIL  Email of the Contacts    contact_phone  True  CHAR  Phone Number of the Contacts    contact_notes  True  TEXT  Notes about of the Contacts    creation_date  False  DATETIME  Creation Date", 
+            "title": "Contact"
+        }, 
+        {
+            "location": "/datamodel/contact/#code-snippet", 
+            "text": "Here the code used to Register the Admin Form for table  Contact  in the Admin Area:  class ContactAdmin(admin.ModelAdmin):\n    fieldsets = [\n        ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),\n        ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),\n        ('Notes', {'fields': ['contact_notes']})\n    ]\n    list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')\n    search_fields = ['contact_username', 'contact_email', 'contact_last_name']", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/datamodel/contact/#contact-type", 
+            "text": "This model is used to specify the type of each Contact (Technical / Manager / Consultant / ...). \nHere the attributes:     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      type_name  False  CHAR  Name of the type    is_valid  False  BOOLEAN  TRUE if the type is available    creation_date  False  DATETIME  Creation Date", 
+            "title": "Contact Type"
+        }, 
+        {
+            "location": "/datamodel/contact/#code-snippet_1", 
+            "text": "Here the code used to Register the Admin Form for table  ContactType  in the Admin Area:  class ContactTypeAdmin(admin.ModelAdmin):\n\n    fieldsets = [\n        ('Contact Type', {'fields': ['type_name', 'is_valid']}),\n    ]\n    list_display = ('type_name', 'is_valid', 'creation_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['type_name']", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/datamodel/relation/", 
+            "text": "CCRelations\n\n\nIn this model we are going to save the relations between \nCompany\n and \nContacts\n. Since each contacts can belong to more then one Company we've created a pivot Table.\n\n\nWe have only 3 parameters, each one is a \nForeignKey\n for the One To Many Relation. We also added to this table the information about the Type of contacts for each relation Contact / Company.\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\ncompany\n\n\nFalse\n\n\nFOREIGN-KEY\n\n\nCompany ID\n\n\n\n\n\n\ncontact\n\n\nFalse\n\n\nFOREIGN-KEY\n\n\nContact ID\n\n\n\n\n\n\ncontact_type\n\n\nFalse\n\n\nFOREIGN-KEY\n\n\nContactType ID\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nCCRelation\n in the Admin Area:\n\n\nclass CCRelationAdmin(admin.ModelAdmin):\n    list_display = ('company', 'contact', 'contact_type')", 
+            "title": "Relations"
+        }, 
+        {
+            "location": "/datamodel/relation/#ccrelations", 
+            "text": "In this model we are going to save the relations between  Company  and  Contacts . Since each contacts can belong to more then one Company we've created a pivot Table.  We have only 3 parameters, each one is a  ForeignKey  for the One To Many Relation. We also added to this table the information about the Type of contacts for each relation Contact / Company.     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      company  False  FOREIGN-KEY  Company ID    contact  False  FOREIGN-KEY  Contact ID    contact_type  False  FOREIGN-KEY  ContactType ID    creation_date  False  DATETIME  Creation Date", 
+            "title": "CCRelations"
+        }, 
+        {
+            "location": "/datamodel/relation/#code-snippet", 
+            "text": "Here the code used to Register the Admin Form for table  CCRelation  in the Admin Area:  class CCRelationAdmin(admin.ModelAdmin):\n    list_display = ('company', 'contact', 'contact_type')", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/datamodel/service/", 
+            "text": "Service\n\n\nWe declared a model \nService\n to save and create tokens for give access to the API Service.\n\n\nFor each Service we have this parameters:\n\n\n\n\n\n\n\n\nFIELD NAME\n\n\nNULLABLE\n\n\nTYPE\n\n\nDESCRIPTION\n\n\n\n\n\n\n\n\n\n\nservice_name\n\n\nFalse\n\n\nCHAR\n\n\nService Name\n\n\n\n\n\n\ntoken_name\n\n\nFalse\n\n\nCHAR\n\n\nToken Used to have access\n\n\n\n\n\n\nis_valid\n\n\nFalse\n\n\nBOOL\n\n\nBoolean Value\n\n\n\n\n\n\ncreation_date\n\n\nFalse\n\n\nDATETIME\n\n\nCreation Date\n\n\n\n\n\n\nactivation_date\n\n\nTrue\n\n\nDATETIME\n\n\nActivation Date of the service\n\n\n\n\n\n\ndelete_date\n\n\nTrue\n\n\nDATETIME\n\n\nDismission Date of the service\n\n\n\n\n\n\nnotes\n\n\nFalse\n\n\nTEXT\n\n\nAddress of the Company\n\n\n\n\n\n\n\n\nCode Snippet\n\n\nHere the code used to Register the Admin Form for table \nService\n in the Admin Area:\n\n\nfieldsets = [\n        ('Service Info', {'fields': ['service_name', 'is_valid']}),\n        ('Token Management', {'fields': ['token']}),\n        ('Notes', {'fields': ['notes']})\n    ]\n    list_display = ('service_name', 'token','is_valid', 'creation_date', 'activation_date', 'delete_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['service_name']\n\n\n    def save_model(self, request, obj, form, change):\n        if change:\n            old_obj = Service.objects.get(id=obj.id)\n            if old_obj.is_valid and not obj.is_valid:\n                # set service not valid\n                obj.delete_date = datetime.datetime.now()\n                obj.token = \"INVALID\"\n            elif not old_obj.is_valid and obj.is_valid:\n                # set service valid\n                obj.delete_date = None\n                obj.activation_date = datetime.datetime.now()\n        obj.save()\n\n\n\nWe are overriding the method \nsave_model\n to set / unset the fields \nactivation_date\n and \ndelete_date\n when the value \nis_valid\n is set / unset.", 
+            "title": "Service"
+        }, 
+        {
+            "location": "/datamodel/service/#service", 
+            "text": "We declared a model  Service  to save and create tokens for give access to the API Service.  For each Service we have this parameters:     FIELD NAME  NULLABLE  TYPE  DESCRIPTION      service_name  False  CHAR  Service Name    token_name  False  CHAR  Token Used to have access    is_valid  False  BOOL  Boolean Value    creation_date  False  DATETIME  Creation Date    activation_date  True  DATETIME  Activation Date of the service    delete_date  True  DATETIME  Dismission Date of the service    notes  False  TEXT  Address of the Company", 
+            "title": "Service"
+        }, 
+        {
+            "location": "/datamodel/service/#code-snippet", 
+            "text": "Here the code used to Register the Admin Form for table  Service  in the Admin Area:  fieldsets = [\n        ('Service Info', {'fields': ['service_name', 'is_valid']}),\n        ('Token Management', {'fields': ['token']}),\n        ('Notes', {'fields': ['notes']})\n    ]\n    list_display = ('service_name', 'token','is_valid', 'creation_date', 'activation_date', 'delete_date')\n    list_filter = ['creation_date', 'is_valid']\n    search_fields = ['service_name']\n\n\n    def save_model(self, request, obj, form, change):\n        if change:\n            old_obj = Service.objects.get(id=obj.id)\n            if old_obj.is_valid and not obj.is_valid:\n                # set service not valid\n                obj.delete_date = datetime.datetime.now()\n                obj.token = \"INVALID\"\n            elif not old_obj.is_valid and obj.is_valid:\n                # set service valid\n                obj.delete_date = None\n                obj.activation_date = datetime.datetime.now()\n        obj.save()  We are overriding the method  save_model  to set / unset the fields  activation_date  and  delete_date  when the value  is_valid  is set / unset.", 
+            "title": "Code Snippet"
+        }, 
+        {
+            "location": "/api/", 
+            "text": "Hello API.", 
+            "title": "API"
+        }, 
+        {
+            "location": "/api/#hello-api", 
+            "text": "", 
+            "title": "Hello API."
+        }
+    ]
+}
