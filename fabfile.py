@@ -27,6 +27,11 @@ def view_test_log():
 def install():
     local('pip install -r requirements.txt')
 
+
+def req_pop():
+    local('pip freeze > requirements.txt')
+
+
 def migrate():
     local('python manage.py migrate')
 
