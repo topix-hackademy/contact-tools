@@ -2,7 +2,7 @@ from django.contrib import admin
 import datetime
 
 ## My Models
-from .models import CompanyType, Service, Company, Contact, ContactType
+from .models import CompanyType, Service, Company, Contact, ContactType, CCRelation
 
 ### COMPANY TYPE ADMIN
 
@@ -91,3 +91,10 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Contact, ContactAdmin)
+
+## CC RELATION ADMIN
+
+class CCRelationAdmin(admin.ModelAdmin):
+    list_display = ('company', 'contact', 'contact_type')
+
+admin.site.register(CCRelation, CCRelationAdmin)

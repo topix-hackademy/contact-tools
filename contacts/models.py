@@ -100,6 +100,15 @@ class ContactType(models.Model):
         ordering = ('type_name',)
 
 
+@python_2_unicode_compatible
+class CCRelation(models.Model):
 
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
+    contact_type = models.ForeignKey(ContactType, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.company.company_short_name + " - " + self.contact.contact_username \
+               + " - " + self.contact_type.type_name
 
 
