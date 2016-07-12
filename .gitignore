@@ -2,6 +2,7 @@
 
 envContact
 .DS_Store
+site
 
 ### Django ###
 *.log

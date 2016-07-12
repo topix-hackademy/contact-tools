@@ -1,5 +1,12 @@
 site_name: Contact-tools Documentation
-theme: cinder
+site_description: Documentation for the Contact Tools developed by TOP-IX
+site_author: TOP-IX HackAdemy
+site_url: http://top-ix.org
+repo_url: https://github.com/topix-hackademy/contact-tools
+
+theme: material
+
+
 pages:
 - [index.md, Home]
 
