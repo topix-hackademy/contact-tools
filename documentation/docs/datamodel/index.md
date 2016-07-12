@@ -14,3 +14,4 @@ We designed to have a simple data model with this particular relations schema:
 
 Here the ER Model.
 
+![ER Diagram](./ER-Diagram.png)

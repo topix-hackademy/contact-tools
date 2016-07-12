@@ -1,6 +1,7 @@
 ### Custom Ignore
 
 envContact
+.DS_Store
 
 ### Django ###
 *.log
