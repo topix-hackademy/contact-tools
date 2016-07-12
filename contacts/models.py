@@ -48,7 +48,7 @@ class Company(models.Model):
     company_short_name = models.CharField('Company Short Name', max_length=200, null=False)
     company_business_name = models.CharField('Company Business Name', max_length=200, null=False)
     company_vat_number = models.IntegerField('VAT Number', default=-1, null=True, blank=True)
-    company_tax_code = models.IntegerField('VAT Number', default=-1, null=True, blank=True)
+    company_tax_code = models.IntegerField('Tax Code', default=-1, null=True, blank=True)
     company_address = models.CharField('Company Address', max_length=200, null=False)
     company_cap = models.CharField('CAP', max_length=10, null=False)
     company_city = models.CharField('City', max_length=200, null=False)

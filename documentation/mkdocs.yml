@@ -1,1 +1,11 @@
-site_name: My Docs
+site_name: Contact-tools Documentation
+pages:
+- [index.md, Home]
+
+- ['datamodel/index.md', 'Data Model']
+- ['datamodel/company.md', 'Data Model', 'Company']
+- ['datamodel/contact.md', 'Data Model', 'Contact']
+- ['datamodel/relation.md', 'Data Model', 'Relations']
+- ['datamodel/service.md', 'Data Model', 'Service']
+
+- ['api/index.md', 'API']

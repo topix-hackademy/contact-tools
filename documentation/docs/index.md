@@ -1,17 +1,21 @@
-# Welcome to MkDocs
+# Welcome to Contact-tools Documentation
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+Welcome to the Contact-Tools Documentation made with love by TOP-IX Hackademy <3.
 
-## Commands
+## Documentation Schema
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+Here the structure of the documentation:
+
+* `Data Model` - Infos about the models - [view](/datamodel/)
+* `API` - API Documentation - [view](/api/)
 
 ## Project layout
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+    contacts/           # App Folder, contains models and API
+    contacttols/        # Admin Folder, contains settings and base management of the project
+    documentation/
+        index.md        # The documentation homepage.
+        ...             # Other markdown pages, images and other files.
+    fabfile.py          # Fab File, we use python Fabric to manage the project
+    requirements.txt    # File with the project requirements
+    
