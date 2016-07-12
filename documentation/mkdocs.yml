@@ -1,4 +1,14 @@
 site_name: Contact-tools Documentation
+site_description: Documentation for the Contact Tools developed by TOP-IX
+site_author: TOP-IX HackAdemy
+site_url: http://top-ix.org
+repo_url: https://github.com/topix-hackademy/contact-tools
+
+theme: material
+
+docs_dir: documentation/docs
+site_dir: documentation/site
+
 pages:
 - [index.md, Home]
 

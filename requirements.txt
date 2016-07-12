@@ -12,6 +12,8 @@ MarkupSafe==0.23
 mkdocs==0.15.3
 mkdocs-bootstrap==0.1.1
 mkdocs-bootswatch==0.4.0
+mkdocs-cinder==0.9.4
+mkdocs-material==0.2.4
 paramiko==1.17.1
 pycrypto==2.6.1
 PyYAML==3.11
