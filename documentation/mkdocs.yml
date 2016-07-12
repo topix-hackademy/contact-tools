@@ -1,4 +1,5 @@
 site_name: Contact-tools Documentation
+theme: cinder
 pages:
 - [index.md, Home]
 
