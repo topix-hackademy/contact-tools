@@ -2,7 +2,7 @@ from django.contrib import admin
 import datetime
 
 ## My Models
-from .models import CompanyType, Service
+from .models import CompanyType, Service, Company, Contact
 
 ### COMPANY TYPE ADMIN
 
@@ -46,3 +46,34 @@ class ServiceAdmin(admin.ModelAdmin):
 
 admin.site.register(Service, ServiceAdmin)
 
+### COMPANY ADMIN
+
+class CompanyAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',
+                                     'company_business_name', 'company_vat_number', 'company_tax_code']}),
+        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
+                                        'company_country']}),
+        ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+        ('Company Type', {'fields': ['company_type']}),
+        ('Notes', {'fields': ['company_notes']})
+    ]
+    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
+    search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
+
+admin.site.register(Company, CompanyAdmin)
+
+
+### CONTACT ADMIN
+
+class ContactAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
+        ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),
+        ('Notes', {'fields': ['contact_notes']})
+    ]
+    list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')
+    search_fields = ['contact_username', 'contact_email', 'contact_last_name']
+
+
+admin.site.register(Contact, ContactAdmin)

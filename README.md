@@ -28,7 +28,7 @@ Create SuperUser:
 
 Run migration for app ```contacts```:
 
-    $ fab migrate_app:'contacts'
+    $ fab migrate_contacts
     $ fab migrate
 
 Run migration for all:

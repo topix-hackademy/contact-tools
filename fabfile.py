@@ -27,17 +27,19 @@ def view_test_log():
 def install():
     local('pip install -r requirements.txt')
 
-
 def migrate():
     local('python manage.py migrate')
+
+def migrate_contacts():
+    local('python manage.py makemigrations contacts')
 
 #fab migrate_app:'APP-NAME'
 def migrate_app(app_name):
     local('python manage.py makemigrations %s' % app_name)
 
 def migrate_all():
-    local('python manage.py migrate')
     local('python manage.py makemigrations contacts')
+    local('python manage.py migrate')
 
 def create_superuser():
     local('python manage.py createsuperuser')
