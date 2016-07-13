@@ -39,6 +39,11 @@ Run migration for all:
 Run seeder for initial test database:
 
     fab load_db
+    
+Use the following credentials for the admin login:
+
+    user:   admin
+    pws:    ciao1234
 
 Run Server:
 
