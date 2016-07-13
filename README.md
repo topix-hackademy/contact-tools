@@ -6,38 +6,39 @@ Django Plugin for contact management @ TOP-IX.
 
 Clone the repository:
 
-    $ git clone https://github.com/topix-hackademy/contact-tools
+    git clone https://github.com/topix-hackademy/contact-tools
     
 Create a virtualenv:
 
-    $ virtualenv envContact
-    $ source envContact/bin/activate
+    virtualenv envContact
+    source envContact/bin/activate
     
 Move into the root directory and install the requirements:
 
-    $ pip install fabric
-    $ fab install
+    pip install fabric
+    fab install
+    fab create_setting
     
 Create DB:
 
-    $ fab migrate
+    fab migrate
     
 Create SuperUser:
 
-    $ fab create_superuser
+    fab create_superuser
 
 Run migration for app ```contacts```:
 
-    $ fab migrate_contacts
-    $ fab migrate
+    fab migrate_contacts
+    fab migrate
 
 Run migration for all:
 
-    $ fab migrate_all
+    fab migrate_all
     
 Run Server:
 
-    $ fab start
+    fab start
     
 ## Contacts APP
 
