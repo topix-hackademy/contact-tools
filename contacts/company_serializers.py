@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company, CompanyType, Service, Contact, ContactType, CCRelation
+from .models import Company, CompanyType
 
 
 class CompanyTypeSerializer(serializers.ModelSerializer):

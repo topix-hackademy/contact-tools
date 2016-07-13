@@ -79,6 +79,10 @@ class Contact(models.Model):
 
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
 
+    # relationship with company
+
+    contact_company = models.ManyToManyField(Company, through='CCRelation')
+
     def __str__(self):
         return self.contact_username + " - " + self.contact_email
 
