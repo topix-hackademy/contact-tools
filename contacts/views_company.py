@@ -19,7 +19,7 @@ def all_companies(request,format=None, *args, **kwargs):
     """
     if request.method == 'GET':
         companies = Company.objects.all()
-        serializer = CompanySerializer(companies, many=True)
+        serializer = CompanySerializer(companies, many=True,  remove_fields=['contact_set'])
         return Response(serializer.data)
 
     elif request.method == 'POST':

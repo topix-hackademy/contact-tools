@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Company, CompanyType
+from .models import Company, CompanyType, Contact
+
 
 class CompanyTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,6 +12,21 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
 
     company_type = CompanyTypeSerializer(many=True)
+    # contact_set = serializers.RelatedField(
+    #     many=True,
+    #     queryset=Contact.objects.all()
+    #     # source='contact_set',
+    #     # view_name='bar-detail'
+    # )
+
+    def __init__(self, *args, **kwargs):
+        remove_fields = kwargs.pop('remove_fields', None)
+        super(CompanySerializer, self).__init__(*args, **kwargs)
+
+        if remove_fields:
+            # for multiple fields in a list
+            for field_name in remove_fields:
+                self.fields.pop(field_name)
 
     def create(self, validated_data):
         company_type_data = validated_data.pop('company_type')
@@ -58,4 +74,4 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('id','company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
                   'company_vat_number', 'company_tax_code', 'company_address','company_cap','company_city',
                   'company_province','company_country', 'company_phone_number', 'company_fax', 'company_website',
-                  'company_notes', 'creation_date', 'company_type')
+                  'company_notes', 'creation_date', 'company_type','contact_set')
