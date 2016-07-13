@@ -38,7 +38,7 @@ Run migration for all:
 
 Run seeder for initial test database:
 
-    python manage.py loaddata db.json
+    fab load_db
 
 Run Server:
 
