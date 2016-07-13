@@ -54,6 +54,7 @@ class Company(models.Model):
     company_fax = models.CharField('FAX', max_length=200, null=True, blank=True)
     company_website = models.CharField('WebSite', max_length=200, null=True, blank=True)
     company_notes = models.TextField('Notes', null=True, blank=True)
+    company_is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
 
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
     # Company Type relation
