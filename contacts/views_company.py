@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from .models import Company
-from .serializers import CompanySerializer
+from .serializers_company import CompanySerializer
 from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
@@ -53,5 +53,4 @@ def single_company(request, id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        company.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
