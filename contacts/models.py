@@ -21,6 +21,7 @@ class CompanyType(models.Model):
     class Meta:
         ordering = ('type_name',)
 
+
 @python_2_unicode_compatible
 class ContactType(models.Model):
     type_name = models.CharField('Contact Type', max_length=200)
@@ -37,12 +38,12 @@ class ContactType(models.Model):
 @python_2_unicode_compatible
 class Company(models.Model):
 
-    company_custom_id = models.IntegerField('Custom ID', null=False)
+    company_custom_id = models.IntegerField('Custom ID', null=False, unique=True)
     company_name = models.CharField('Company Name', max_length=200, null=False)
     company_short_name = models.CharField('Company Short Name', max_length=200, null=False)
     company_business_name = models.CharField('Company Business Name', max_length=200, null=False)
-    company_vat_number = models.IntegerField('VAT Number', default=-1, null=True, blank=True)
-    company_tax_code = models.IntegerField('Tax Code', default=-1, null=True, blank=True)
+    company_vat_number = models.IntegerField('VAT Number', default=-1, null=True, blank=True, unique=True)
+    company_tax_code = models.IntegerField('Tax Code', default=-1, null=True, blank=True, unique=True)
     company_address = models.CharField('Company Address', max_length=200, null=False)
     company_cap = models.CharField('CAP', max_length=10, null=False)
     company_city = models.CharField('City', max_length=200, null=False)
@@ -67,7 +68,7 @@ class Company(models.Model):
 @python_2_unicode_compatible
 class Contact(models.Model):
 
-    contact_username = models.CharField('Contact User Name', max_length=200, null=False, blank=False)
+    contact_username = models.CharField('Contact User Name', max_length=200, null=False, blank=False, unique=True)
     contact_first_name = models.CharField('Contact First Name', max_length=200, null=True, blank=True)
     contact_last_name = models.CharField('Contact Last Name', max_length=200, null=True, blank=True)
     contact_email = models.EmailField('Contact Email', max_length=200, null=False, blank=False)
@@ -101,7 +102,7 @@ class CCRelation(models.Model):
 class Service(models.Model):
 
     service_name = models.CharField('Service Name', max_length=200, null=False, blank=False)
-    token = models.CharField('Token', default=create_uid, max_length=200, null=False, blank=False)
+    token = models.CharField('Token', default=create_uid, max_length=200, null=False, blank=False, unique=True)
     is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
     activation_date = models.DateTimeField('Activation Date', default=datetime.datetime.now)
