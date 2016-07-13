@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_ROOT = '/var/www/contact-tools/static_root'
+
 
 # Application definition
 
