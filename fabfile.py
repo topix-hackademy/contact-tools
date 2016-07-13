@@ -27,6 +27,9 @@ def view_test_log():
 def install():
     local('pip install -r requirements.txt')
 
+def install_static():
+    local('python ./manage.py collectstatic')
+
 def create_setting():
     local('cp contacttools/local_settings.py contacttools/settings.py')
 
