@@ -35,7 +35,11 @@ Run migration for app ```contacts```:
 Run migration for all:
 
     fab migrate_all
-    
+
+Run seeder for initial test database:
+
+    python manage.py loaddata db.json
+
 Run Server:
 
     fab start
