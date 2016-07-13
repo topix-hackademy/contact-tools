@@ -130,7 +130,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'ct-verbose': {
-            'format': '[%(asctime)s] {%(module)s} %(levelname)s: %(message)s'
+            'format': '[%(asctime)s] %(levelname)s: %(message)s'
         },
         'ct-simple': {
             'format': '****** [%(asctime)s] %(levelname)s: %(message)s '

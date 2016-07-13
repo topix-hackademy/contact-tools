@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 import datetime
 
+
 def create_uid():
     import uuid
     return str(uuid.uuid4())
