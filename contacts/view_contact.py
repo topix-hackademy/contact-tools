@@ -1,29 +1,25 @@
 from django.http import HttpResponse
-from .models import Company
-from .company_serializers import CompanySerializer
+from .models import Contact
+from .serializers_contact import ContactSerializer
 from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 
-def index(request):
-    return HttpResponse("Control is an illusion")
-
-
 @api_view(['GET','POST'])
 @auth_decorator
-def all_companies(request,format=None, *args, **kwargs):
+def all_contacts(request,format=None, *args, **kwargs):
     """
     List all snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        companies = Company.objects.all()
-        serializer = CompanySerializer(companies, many=True)
+        contacts = Contact.objects.all()
+        serializer = ContactSerializer(contacts, many=True, remove_fields=['contact_company'])
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = CompanySerializer(data=request.data)
+        serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -32,17 +28,17 @@ def all_companies(request,format=None, *args, **kwargs):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @auth_decorator
-def single_company(request, id, format=None):
+def single_contact(request, id, format=None):
     """
     Retrieve, update or delete a snippet instance.
     """
     try:
-        company = Company.objects.get(company_custom_id=id)
-    except Company.DoesNotExist:
+        contact = Contact.objects.get(id=id)
+    except Contact.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = CompanySerializer(company)
+        serializer = ContactSerializer(contact)
         return Response(serializer.data)
 
     elif request.method == 'PUT':

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Company, CompanyType
 
-
 class CompanyTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyType
@@ -53,8 +52,6 @@ class CompanySerializer(serializers.ModelSerializer):
             instance.company_type.add(company_type)
         instance.save()
         return instance
-
-
 
     class Meta:
         model = Company

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Contact, ContactType
+from .serializers_company import CompanySerializer
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
@@ -11,7 +12,16 @@ class ContactTypeSerializer(serializers.ModelSerializer):
 
 class ContactSerializer(serializers.ModelSerializer):
 
-    # company_type = ContactTypeSerializer(many=True)
+    contact_company = CompanySerializer(many=True)
+
+    def __init__(self, *args, **kwargs):
+        remove_fields = kwargs.pop('remove_fields', None)
+        super(ContactSerializer, self).__init__(*args, **kwargs)
+
+        if remove_fields:
+            # for multiple fields in a list
+            for field_name in remove_fields:
+                self.fields.pop(field_name)
 
     # def create(self, validated_data):
     #     company_type_data = validated_data.pop('company_type')
@@ -59,4 +69,4 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ('id', 'contact_username', 'contact_first_name', 'contact_last_name', 'contact_email',
-                  'contact_phone', 'contact_notes')
+                  'contact_phone', 'contact_notes', 'contact_company')

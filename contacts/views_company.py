@@ -1,25 +1,29 @@
 from django.http import HttpResponse
-from .models import Contact
-from .contact_serializers import ContactSerializer
+from .models import Company
+from .serializers_company import CompanySerializer
 from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 
+def index(request):
+    return HttpResponse("Control is an illusion")
+
+
 @api_view(['GET','POST'])
 @auth_decorator
-def all_contacts(request,format=None, *args, **kwargs):
+def all_companies(request,format=None, *args, **kwargs):
     """
     List all snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        contacts = Contact.objects.all()
-        serializer = ContactSerializer(contacts, many=True)
+        companies = Company.objects.all()
+        serializer = CompanySerializer(companies, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = ContactSerializer(data=request.data)
+        serializer = CompanySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -28,7 +32,7 @@ def all_contacts(request,format=None, *args, **kwargs):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @auth_decorator
-def single_contact(request, id, format=None):
+def single_company(request, id, format=None):
     """
     Retrieve, update or delete a snippet instance.
     """
