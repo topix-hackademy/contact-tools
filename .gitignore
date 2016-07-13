@@ -4,13 +4,13 @@ envContact
 .DS_Store
 site
 .idea
+settings.py
 
 ### Django ###
 *.log
 *.pot
 *.pyc
 __pycache__/
-local_settings.py
 db.sqlite3
 media
 
