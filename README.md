@@ -50,6 +50,19 @@ App ```contacts``` contains all the controllers, models and urls to manage custo
 
     http://127.0.0.1:8000/api/
 
+## Logging
+
+There is a custom logger configured called "ct-logger" 
+
+    # import the logging library
+    import logging
+    
+    # Get an instance of a logger
+    logger = logging.getLogger("ct-logger")
+    
+    # Log an message
+    logger.error("Hello Friend")
+
 ## Documentation
 
 We provided a full documentation on Data Model and API. We are using MKDocs, here some utils.

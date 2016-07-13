@@ -5,8 +5,16 @@ from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger("ct-logger")
+
 
 def index(request):
+    # Log an message
+    logger.error("Hello Friend")
     return HttpResponse("Control is an illusion")
 
 

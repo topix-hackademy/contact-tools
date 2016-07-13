@@ -128,18 +128,37 @@ STATIC_URL = '/static/'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'ct-verbose': {
+            'format': '[%(asctime)s] {%(module)s} %(levelname)s: %(message)s'
+        },
+        'ct-simple': {
+            'format': '****** [%(asctime)s] %(levelname)s: %(message)s '
+        }
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/tmp/contacttools.log',
+            'formatter': 'ct-verbose'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'ct-simple'
         }
     },
     'loggers': {
-        'contacttools': {
-            'handlers': ['file'],
+        'ct-logger': {
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
-            'propagate': True,
         },
     }
 }
