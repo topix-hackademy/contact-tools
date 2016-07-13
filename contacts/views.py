@@ -37,7 +37,7 @@ def single_company(request, id, format=None):
     Retrieve, update or delete a snippet instance.
     """
     try:
-        company = Company.objects.get(custom_id=id)
+        company = Company.objects.get(company_custom_id=id)
     except Company.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
