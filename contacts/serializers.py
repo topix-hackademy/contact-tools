@@ -6,11 +6,26 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyType
         fields = ('id','type_name', 'is_valid', 'creation_date')
+        extra_kwargs = {'id': {'read_only': False}}
 
 
 class CompanySerializer(serializers.ModelSerializer):
 
-    company_type = CompanyTypeSerializer(many=True, read_only=True)
+    company_type = CompanyTypeSerializer(many=True)
+
+    def create(self, validated_data):
+        company_type_data = validated_data.pop('company_type')
+        company = Company.objects.create(**validated_data)
+
+        for item in company_type_data:
+            try:
+                company_type = CompanyType.objects.get(id=item['id'])
+            except Exception as e:
+                company.delete()
+                raise serializers.ValidationError({'company_type': ["Invalid company type"]})
+            company.company_type.add(company_type)
+        company.save()
+        return company
 
     class Meta:
         model = Company
