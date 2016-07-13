@@ -33,6 +33,9 @@ def create_setting():
 def req_pop():
     local('pip freeze > requirements.txt')
 
+def load_db():
+    local('python manage.py loaddata db.json')
+
 def migrate():
     local('python manage.py migrate')
 
