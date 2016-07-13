@@ -68,6 +68,63 @@ There is a custom logger configured called "ct-logger"
     # Log an message
     logger.error("Hello Friend")
 
+## Deploy with Apache
+
+Be sure to create the setting file for the production env (you can use ```fab create_setting```) and create a virtualenv on your remote machine. 
+
+You need to override the voice ```STATICFILES_DIR``` in this way:
+
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static_root")
+    ]
+
+After that, you need to install your static folder:
+
+    fab install_static
+
+Here your apache configuration:
+
+    <VirtualHost *:80>
+    
+            ServerName www.contacts.org
+            ServerAdmin admin@contacts.org
+    
+            WSGIScriptAlias / /var/www/contact-tools/contacttools/wsgi.py
+    
+            WSGIDaemonProcess CONTACTS python-path=/var/www/contact-tools:/PATH/TO/ENV/lib/python2.7/site-packages
+    
+            WSGIProcessGroup CONTACTS
+    
+            DocumentRoot /var/www/contact-tools
+    
+            Alias /static/ /var/www/contact-tools/static_root/
+    
+    <Directory /var/www/contact-tools/>
+    
+      Options ExecCGI MultiViews Indexes
+    
+      MultiViewsMatch Handlers
+    
+      AddHandler wsgi-script .py
+    
+      AddHandler wsgi-script .wsgi
+    
+      DirectoryIndex index.html index.py app.wsgi
+    
+      Order allow,deny
+    
+      Require all granted
+    
+      Allow from all
+    
+    </Directory>
+            ErrorLog ${APACHE_LOG_DIR}/contact-tools-error.log
+            CustomLog ${APACHE_LOG_DIR}/contact-tools-access.log combined
+    
+    </VirtualHost>
+    
+Well done! :)
+
 ## Documentation
 
 We provided a full documentation on Data Model and API. We are using MKDocs, here some utils.
