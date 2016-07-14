@@ -5,6 +5,7 @@ envContact
 site
 .idea
 settings.py
+static_root
 
 ### Django ###
 *.log
