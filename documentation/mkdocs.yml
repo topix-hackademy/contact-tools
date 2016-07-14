@@ -19,3 +19,5 @@ pages:
 - ['datamodel/service.md', 'Data Model', 'Service']
 
 - ['api/index.md', 'API']
+
+- ['deploy/index.md', 'DEPLOY']

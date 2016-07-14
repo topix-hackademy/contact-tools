@@ -8,6 +8,7 @@ Here the structure of the documentation:
 
 * `Data Model` - Infos about the models - [view](/datamodel/)
 * `API` - API Documentation - [view](/api/)
+* `DEPLOY` - How To Deploy Django on Apache2 - [view](/deploy/)
 
 ## Project layout
 
