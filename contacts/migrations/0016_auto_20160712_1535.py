@@ -13,16 +13,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='ccrelation',
-            name='creation_date',
-            field=models.DateTimeField(default=datetime.datetime.now, verbose_name='Creation Date'),
-        ),
-        migrations.AddField(
-            model_name='contact',
-            name='creation_date',
-            field=models.DateTimeField(default=datetime.datetime.now, verbose_name='Creation Date'),
-        ),
         migrations.AlterField(
             model_name='company',
             name='company_tax_code',
