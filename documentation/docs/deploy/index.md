@@ -43,6 +43,21 @@ apt-get install git
 Use GIT to download the app inside folder `/var/www/`, then create a virtualenv. 
 After that install inside the virtualenv the requirements (infos are on Readme.md).
 
+Remember to change the setting file in according with you policy and deploy strategy.
+
+To be sure to avoid security problem you can read the deploy checklist:
+
+```
+python manage.py check --deploy 
+```
+
+## Setup Static Files
+
+Every time there is an update, we need to reload the static files (using fabric from the root of the project. __ONLY IN PRODUCTION__):
+
+```
+fab install_static
+```
 
 ## Create VirtualHost
 
