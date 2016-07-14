@@ -60,13 +60,21 @@ class Company(models.Model):
     # Company Type relation
     company_type = models.ManyToManyField(CompanyType)
 
-
     def __str__(self):
         return self.company_name
 
     class Meta:
         ordering = ('company_name',)
 
+    @property
+    def contacts(self):
+        relations = []
+        for rel in self.ccrelation_set.all():
+            relations.append({"role": rel.contact_type.type_name,
+                              "contact": {"id": rel.contact.id,
+                                          "contact_username": rel.contact.contact_username,
+                                          "contact_email": rel.contact.contact_email}})
+        return {"relations": relations}
 
 @python_2_unicode_compatible
 class Contact(models.Model):
@@ -81,7 +89,6 @@ class Contact(models.Model):
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
 
     # relationship with company
-
     contact_company = models.ManyToManyField(Company, through='CCRelation')
 
     def __str__(self):
@@ -89,6 +96,14 @@ class Contact(models.Model):
 
     class Meta:
         ordering = ('contact_email',)
+
+    @property
+    def role(self):
+        relations = []
+        for rel in self.ccrelation_set.all():
+            relations.append({"role": rel.contact_type.type_name,
+                              "company": {"company_custom_id": rel.company.company_custom_id, "company_name":rel.company.company_name}})
+        return {"relations": relations}
 
 
 @python_2_unicode_compatible
@@ -103,6 +118,7 @@ class CCRelation(models.Model):
     def __str__(self):
         return self.company.company_short_name + " - " + self.contact.contact_username \
                + " - " + self.contact_type.type_name
+
 
 
 @python_2_unicode_compatible

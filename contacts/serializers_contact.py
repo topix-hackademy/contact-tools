@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Contact, ContactType
-from .serializers_company import CompanySerializer
+from .models import Contact, ContactType, Company
+from .serializers_company import CompanyTypeSerializer
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
@@ -10,9 +10,22 @@ class ContactTypeSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': False}}
 
 
+class ShallowCompanySerializer(serializers.ModelSerializer):
+
+    company_type = CompanyTypeSerializer(many=True)
+
+    class Meta:
+        model = Company
+        fields = ('id', 'company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
+                  'company_vat_number', 'company_tax_code', 'company_address', 'company_cap', 'company_city',
+                  'company_province', 'company_country', 'company_phone_number', 'company_fax', 'company_website',
+                  'company_notes', 'creation_date', 'company_type')
+
+
 class ContactSerializer(serializers.ModelSerializer):
 
-    contact_company = CompanySerializer(many=True)
+    # contact_company = ShallowCompanySerializer(many=True)
+    role = serializers.ReadOnlyField()
 
     def __init__(self, *args, **kwargs):
         remove_fields = kwargs.pop('remove_fields', None)
@@ -69,4 +82,4 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ('id', 'contact_username', 'contact_first_name', 'contact_last_name', 'contact_email',
-                  'contact_phone', 'contact_notes', 'contact_company')
+                  'contact_phone', 'contact_notes', 'role')
