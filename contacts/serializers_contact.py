@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Contact, ContactType, Company
+from .models import Contact, ContactType, Company, CCRelation
 from .serializers_company import CompanyTypeSerializer
 
 
@@ -10,22 +10,9 @@ class ContactTypeSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': False}}
 
 
-class ShallowCompanySerializer(serializers.ModelSerializer):
-
-    company_type = CompanyTypeSerializer(many=True)
-
-    class Meta:
-        model = Company
-        fields = ('id', 'company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
-                  'company_vat_number', 'company_tax_code', 'company_address', 'company_cap', 'company_city',
-                  'company_province', 'company_country', 'company_phone_number', 'company_fax', 'company_website',
-                  'company_notes', 'creation_date', 'company_type')
-
-
 class ContactSerializer(serializers.ModelSerializer):
 
-    # contact_company = ShallowCompanySerializer(many=True)
-    role = serializers.ReadOnlyField()
+    role = serializers.DictField()
 
     def __init__(self, *args, **kwargs):
         remove_fields = kwargs.pop('remove_fields', None)
@@ -36,19 +23,24 @@ class ContactSerializer(serializers.ModelSerializer):
             for field_name in remove_fields:
                 self.fields.pop(field_name)
 
-    # def create(self, validated_data):
-    #     company_type_data = validated_data.pop('company_type')
-    #     contact = Contact.objects.create(**validated_data)
-    #
-    #     for item in company_type_data:
-    #         try:
-    #             company_type = CompanyType.objects.get(id=item['id'])
-    #         except Exception as e:
-    #             company.delete()
-    #             raise serializers.ValidationError({'company_type': ["Invalid company type"]})
-    #         company.company_type.add(company_type)
-    #     company.save()
-    #     return company
+    def create(self, validated_data):
+        print validated_data
+        contact_role_data = validated_data.pop('role')
+        contact = Contact.objects.create(**validated_data)
+        for item in contact_role_data['relations']:
+            print item
+            try:
+                company = Company.objects.get(company_custom_id = item['company']['company_custom_id'])
+                contact_type = ContactType.objects.get(type_name = item['role'])
+                relationship = CCRelation.objects.create(company=company,contact_type=contact_type, contact = contact)
+            except Exception as e:
+                contact.delete()
+                raise serializers.ValidationError({'company_type': ["Invalid company type"]})
+
+            contact.save()
+            relationship.save()
+            return contact
+
 
     # def update(self,  instance, validated_data):
     #     company_type_data = validated_data.pop('company_type')

@@ -15,7 +15,7 @@ def all_contacts(request,format=None, *args, **kwargs):
     """
     if request.method == 'GET':
         contacts = Contact.objects.all()
-        serializer = ContactSerializer(contacts, many=True, remove_fields=['contact_company'])
+        serializer = ContactSerializer(contacts, many=True, remove_fields=['role'])
         return Response(serializer.data)
 
     elif request.method == 'POST':

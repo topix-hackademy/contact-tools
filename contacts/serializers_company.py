@@ -8,18 +8,9 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': False}}
 
 
-class ShallowContactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = ('id', 'contact_username', 'contact_first_name', 'contact_first_name', 'contact_last_name',
-                  'contact_email', 'contact_phone', 'contact_notes',)
-        extra_kwargs = {'id': {'read_only': False}}
-
-
 class CompanySerializer(serializers.ModelSerializer):
 
     company_type = CompanyTypeSerializer(many=True)
-    #contact_set = ShallowContactSerializer(many=True)
     contacts = serializers.ReadOnlyField()
 
     def __init__(self, *args, **kwargs):
