@@ -75,7 +75,7 @@ Be sure to create the setting file for the production env (you can use ```fab cr
 You need to override the voice ```STATICFILES_DIR``` in this way:
 
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static_root")
+        os.path.join(BASE_DIR, "static")
     ]
 
 After that, you need to install your static folder:
@@ -124,6 +124,8 @@ Here your apache configuration:
     </VirtualHost>
     
 Well done! :)
+
+_PS: For more information checkout the real documentation._
 
 ## Documentation
 

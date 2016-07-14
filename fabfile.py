@@ -30,6 +30,9 @@ def install():
 def install_static():
     local('python ./manage.py collectstatic')
 
+def check_deploy():
+    local('python manage.py check --deploy')
+
 def create_setting():
     local('cp contacttools/local_settings.py contacttools/settings.py')
 
