@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Company, CompanyType, Contact
 
-
 class CompanyTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyType
@@ -9,15 +8,17 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': False}}
 
 
+class ShallowContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('id','contact_username','contact_first_name')
+        extra_kwargs = {'id': {'read_only': False}}
+
+
 class CompanySerializer(serializers.ModelSerializer):
 
     company_type = CompanyTypeSerializer(many=True)
-    # contact_set = serializers.RelatedField(
-    #     many=True,
-    #     queryset=Contact.objects.all()
-    #     # source='contact_set',
-    #     # view_name='bar-detail'
-    # )
+    contact_set = ShallowContactSerializer(many=True)
 
     def __init__(self, *args, **kwargs):
         remove_fields = kwargs.pop('remove_fields', None)

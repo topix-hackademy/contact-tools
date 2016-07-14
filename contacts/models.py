@@ -60,6 +60,7 @@ class Company(models.Model):
     # Company Type relation
     company_type = models.ManyToManyField(CompanyType)
 
+
     def __str__(self):
         return self.company_name
 
