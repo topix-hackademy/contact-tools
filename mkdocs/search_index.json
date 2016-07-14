@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to Contact-tools Documentation\n\n\nWelcome to the Contact-Tools Documentation made with love by TOP-IX Hackademy \n3.\n\n\nDocumentation Schema\n\n\nHere the structure of the documentation:\n\n\n\n\nData Model\n - Infos about the models - \nview\n\n\nAPI\n - API Documentation - \nview\n\n\n\n\nProject layout\n\n\ncontacts/           # App Folder, contains models and API\ncontacttols/        # Admin Folder, contains settings and base management of the project\ndocumentation/\n    index.md        # The documentation homepage.\n    ...             # Other markdown pages, images and other files.\nfabfile.py          # Fab File, we use python Fabric to manage the project\nrequirements.txt    # File with the project requirements", 
+            "text": "Welcome to Contact-tools Documentation\n\n\nWelcome to the Contact-Tools Documentation made with love by TOP-IX Hackademy \n3.\n\n\nDocumentation Schema\n\n\nHere the structure of the documentation:\n\n\n\n\nData Model\n - Infos about the models - \nview\n\n\nAPI\n - API Documentation - \nview\n\n\nDEPLOY\n - How To Deploy Django on Apache2 - \nview\n\n\n\n\nProject layout\n\n\ncontacts/           # App Folder, contains models and API\ncontacttols/        # Admin Folder, contains settings and base management of the project\ndocumentation/\n    index.md        # The documentation homepage.\n    ...             # Other markdown pages, images and other files.\nfabfile.py          # Fab File, we use python Fabric to manage the project\nrequirements.txt    # File with the project requirements", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/#documentation-schema", 
-            "text": "Here the structure of the documentation:   Data Model  - Infos about the models -  view  API  - API Documentation -  view", 
+            "text": "Here the structure of the documentation:   Data Model  - Infos about the models -  view  API  - API Documentation -  view  DEPLOY  - How To Deploy Django on Apache2 -  view", 
             "title": "Documentation Schema"
         }, 
         {
@@ -124,6 +124,51 @@
             "location": "/api/#hello-api", 
             "text": "", 
             "title": "Hello API."
+        }, 
+        {
+            "location": "/deploy/", 
+            "text": "Deploy Django - Apache2\n\n\nUpgrade Virtual Machine\n\n\nsudo apt-get update\nsudo apt-get upgrade\n\n\n\n\nApache2 Installation\n\n\nsudo apt-get install apache2\nsudo apt-get install libapache2-mod-wsgi\n\n\n\n\nInstallation DB mySql e phpMyAdmin\n\n\nsudo apt-get install mysql-server\nsudo apt-get install libmysqlclient-dev\nsudo apt-get install phpmyadmin php-mbstring php-gettext\n\n\n\n\nInstallation requirements for python, pip and virtualenv\n\n\napt-get install build-essential\napt-get install python-setuptools\napt-get install python-dev python-pip\npip install virtualenv\npip install MySQL-python\n\n\n\n\nInstallation git\n\n\napt-get install git\n\n\n\n\nDownload and setup APP Django\n\n\nUse GIT to download the app inside folder \n/var/www/\n, then create a virtualenv. \nAfter that install inside the virtualenv the requirements (infos are on Readme.md).\n\n\nCreate VirtualHost\n\n\nHere a base example of virtualhost:\n\n\n  \nVirtualHost *:80\n\n\n          ServerName contacts.top-ix.org\n          ServerAdmin hackademy@top-ix.org\n\n          WSGIScriptAlias / /var/www/contact-tools/contacttools/wsgi.py\n\n          WSGIDaemonProcess CONTACTS-TOPIX python-path=/var/www/contact-tools:/var/www/envContactTools/lib/python2.7/site-packages\n\n          WSGIProcessGroup CONTACTS-TOPIX\n\n          DocumentRoot /var/www/contact-tools\n\n          Alias /static/ /var/www/contact-tools/static_root/\n\n  \nDirectory /var/www/contact-tools/\n\n\n    Options ExecCGI MultiViews Indexes\n\n    MultiViewsMatch Handlers\n\n    AddHandler wsgi-script .py\n\n    AddHandler wsgi-script .wsgi\n\n    DirectoryIndex index.html index.py app.wsgi\n\n    Order allow,deny\n\n    Require all granted\n\n    Allow from all\n\n  \n/Directory\n\n          ErrorLog ${APACHE_LOG_DIR}/contact-tools-error.log\n          CustomLog ${APACHE_LOG_DIR}/contact-tools-access.log combined\n\n  \n/VirtualHost\n\n\n\n\n\nNow, enable the virtualhost and reload Apache:\n\n\na2ensite 001-myapp.conf\nservice apache2 reload", 
+            "title": "DEPLOY"
+        }, 
+        {
+            "location": "/deploy/#deploy-django-apache2", 
+            "text": "", 
+            "title": "Deploy Django - Apache2"
+        }, 
+        {
+            "location": "/deploy/#upgrade-virtual-machine", 
+            "text": "sudo apt-get update\nsudo apt-get upgrade", 
+            "title": "Upgrade Virtual Machine"
+        }, 
+        {
+            "location": "/deploy/#apache2-installation", 
+            "text": "sudo apt-get install apache2\nsudo apt-get install libapache2-mod-wsgi", 
+            "title": "Apache2 Installation"
+        }, 
+        {
+            "location": "/deploy/#installation-db-mysql-e-phpmyadmin", 
+            "text": "sudo apt-get install mysql-server\nsudo apt-get install libmysqlclient-dev\nsudo apt-get install phpmyadmin php-mbstring php-gettext", 
+            "title": "Installation DB mySql e phpMyAdmin"
+        }, 
+        {
+            "location": "/deploy/#installation-requirements-for-python-pip-and-virtualenv", 
+            "text": "apt-get install build-essential\napt-get install python-setuptools\napt-get install python-dev python-pip\npip install virtualenv\npip install MySQL-python", 
+            "title": "Installation requirements for python, pip and virtualenv"
+        }, 
+        {
+            "location": "/deploy/#installation-git", 
+            "text": "apt-get install git", 
+            "title": "Installation git"
+        }, 
+        {
+            "location": "/deploy/#download-and-setup-app-django", 
+            "text": "Use GIT to download the app inside folder  /var/www/ , then create a virtualenv. \nAfter that install inside the virtualenv the requirements (infos are on Readme.md).", 
+            "title": "Download and setup APP Django"
+        }, 
+        {
+            "location": "/deploy/#create-virtualhost", 
+            "text": "Here a base example of virtualhost:     VirtualHost *:80 \n\n          ServerName contacts.top-ix.org\n          ServerAdmin hackademy@top-ix.org\n\n          WSGIScriptAlias / /var/www/contact-tools/contacttools/wsgi.py\n\n          WSGIDaemonProcess CONTACTS-TOPIX python-path=/var/www/contact-tools:/var/www/envContactTools/lib/python2.7/site-packages\n\n          WSGIProcessGroup CONTACTS-TOPIX\n\n          DocumentRoot /var/www/contact-tools\n\n          Alias /static/ /var/www/contact-tools/static_root/\n\n   Directory /var/www/contact-tools/ \n\n    Options ExecCGI MultiViews Indexes\n\n    MultiViewsMatch Handlers\n\n    AddHandler wsgi-script .py\n\n    AddHandler wsgi-script .wsgi\n\n    DirectoryIndex index.html index.py app.wsgi\n\n    Order allow,deny\n\n    Require all granted\n\n    Allow from all\n\n   /Directory \n          ErrorLog ${APACHE_LOG_DIR}/contact-tools-error.log\n          CustomLog ${APACHE_LOG_DIR}/contact-tools-access.log combined\n\n   /VirtualHost   Now, enable the virtualhost and reload Apache:  a2ensite 001-myapp.conf\nservice apache2 reload", 
+            "title": "Create VirtualHost"
         }
     ]
 }

@@ -9,19 +9,19 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>API - Contact-tools Documentation</title>
+        <title>DEPLOY - Contact-tools Documentation</title>
       
       
       
-        <link rel="canonical" href="http://top-ix.org/api/">
+        <link rel="canonical" href="http://top-ix.org/deploy/">
       
       
         <meta name="author" content="TOP-IX HackAdemy">
       
     
-    <meta property="og:url" content="http://top-ix.org/api/">
+    <meta property="og:url" content="http://top-ix.org/deploy/">
     <meta property="og:title" content="Contact-tools Documentation">
-    <meta property="og:image" content="http://top-ix.org/api//../">
+    <meta property="og:image" content="http://top-ix.org/deploy//../">
     <meta name="apple-mobile-web-app-title" content="Contact-tools Documentation">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -94,7 +94,7 @@
             
           </span>
         
-        API
+        DEPLOY
       </div>
     </div>
     
@@ -227,23 +227,69 @@
           
             
   <li>
-    <a class="current" title="API" href="./">
+    <a class="" title="API" href="../api/">
       API
     </a>
-    
-      
-        
-      
-      
     
   </li>
 
           
             
   <li>
-    <a class="" title="DEPLOY" href="../deploy/">
+    <a class="current" title="DEPLOY" href="./">
       DEPLOY
     </a>
+    
+      
+        
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Upgrade Virtual Machine" href="#upgrade-virtual-machine">
+                Upgrade Virtual Machine
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Apache2 Installation" href="#apache2-installation">
+                Apache2 Installation
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Installation DB mySql e phpMyAdmin" href="#installation-db-mysql-e-phpmyadmin">
+                Installation DB mySql e phpMyAdmin
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Installation requirements for python, pip and virtualenv" href="#installation-requirements-for-python-pip-and-virtualenv">
+                Installation requirements for python, pip and virtualenv
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Installation git" href="#installation-git">
+                Installation git
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Download and setup APP Django" href="#download-and-setup-app-django">
+                Download and setup APP Django
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Create VirtualHost" href="#create-virtualhost">
+                Create VirtualHost
+              </a>
+            </li>
+          
+        </ul>
+      
     
   </li>
 
@@ -258,7 +304,84 @@
       <article class="article">
         <div class="wrapper">
           
-          <h1 id="hello-api">Hello API.</h1>
+          <h1 id="deploy-django-apache2">Deploy Django - Apache2</h1>
+<h2 id="upgrade-virtual-machine">Upgrade Virtual Machine</h2>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+
+<h2 id="apache2-installation">Apache2 Installation</h2>
+<pre><code>sudo apt-get install apache2
+sudo apt-get install libapache2-mod-wsgi
+</code></pre>
+
+<h2 id="installation-db-mysql-e-phpmyadmin">Installation DB mySql e phpMyAdmin</h2>
+<pre><code>sudo apt-get install mysql-server
+sudo apt-get install libmysqlclient-dev
+sudo apt-get install phpmyadmin php-mbstring php-gettext
+</code></pre>
+
+<h2 id="installation-requirements-for-python-pip-and-virtualenv">Installation requirements for python, pip and virtualenv</h2>
+<pre><code>apt-get install build-essential
+apt-get install python-setuptools
+apt-get install python-dev python-pip
+pip install virtualenv
+pip install MySQL-python
+</code></pre>
+
+<h2 id="installation-git">Installation git</h2>
+<pre><code>apt-get install git
+</code></pre>
+
+<h2 id="download-and-setup-app-django">Download and setup APP Django</h2>
+<p>Use GIT to download the app inside folder <code>/var/www/</code>, then create a virtualenv. 
+After that install inside the virtualenv the requirements (infos are on Readme.md).</p>
+<h2 id="create-virtualhost">Create VirtualHost</h2>
+<p>Here a base example of virtualhost:</p>
+<pre><code>  &lt;VirtualHost *:80&gt;
+
+          ServerName contacts.top-ix.org
+          ServerAdmin hackademy@top-ix.org
+
+          WSGIScriptAlias / /var/www/contact-tools/contacttools/wsgi.py
+
+          WSGIDaemonProcess CONTACTS-TOPIX python-path=/var/www/contact-tools:/var/www/envContactTools/lib/python2.7/site-packages
+
+          WSGIProcessGroup CONTACTS-TOPIX
+
+          DocumentRoot /var/www/contact-tools
+
+          Alias /static/ /var/www/contact-tools/static_root/
+
+  &lt;Directory /var/www/contact-tools/&gt;
+
+    Options ExecCGI MultiViews Indexes
+
+    MultiViewsMatch Handlers
+
+    AddHandler wsgi-script .py
+
+    AddHandler wsgi-script .wsgi
+
+    DirectoryIndex index.html index.py app.wsgi
+
+    Order allow,deny
+
+    Require all granted
+
+    Allow from all
+
+  &lt;/Directory&gt;
+          ErrorLog ${APACHE_LOG_DIR}/contact-tools-error.log
+          CustomLog ${APACHE_LOG_DIR}/contact-tools-access.log combined
+
+  &lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Now, enable the virtualhost and reload Apache:</p>
+<pre><code>a2ensite 001-myapp.conf
+service apache2 reload
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -275,7 +398,7 @@
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../datamodel/service/" title="Service">
+        <a href="../api/" title="API">
           <span class="direction">
             Previous
           </span>
@@ -285,7 +408,7 @@
             </div>
             <div class="stretch">
               <div class="title">
-                Service
+                API
               </div>
             </div>
           </div>
@@ -293,22 +416,6 @@
       
     </div>
     <div class="next">
-      
-        <a href="../deploy/" title="DEPLOY">
-          <span class="direction">
-            Next
-          </span>
-          <div class="page">
-            <div class="stretch">
-              <div class="title">
-                DEPLOY
-              </div>
-            </div>
-            <div class="button button-next" role="button" aria-label="Next">
-              <i class="icon icon-forward"></i>
-            </div>
-          </div>
-        </a>
       
     </div>
   </nav>
