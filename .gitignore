@@ -6,6 +6,7 @@ site
 .idea
 settings.py
 static_root
+contacttools-custom.log
 
 ### Django ###
 *.log
