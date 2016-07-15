@@ -42,7 +42,7 @@ def single_contact(request, id, format=None):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = CompanySerializer(company, data=request.data)
+        serializer = ContactSerializer(contact, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

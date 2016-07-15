@@ -76,6 +76,7 @@ class Company(models.Model):
                                           "contact_email": rel.contact.contact_email}})
         return {"relations": relations}
 
+
 @python_2_unicode_compatible
 class Contact(models.Model):
 

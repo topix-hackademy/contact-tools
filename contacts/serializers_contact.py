@@ -19,7 +19,6 @@ class ContactSerializer(serializers.ModelSerializer):
         super(ContactSerializer, self).__init__(*args, **kwargs)
 
         if remove_fields:
-            # for multiple fields in a list
             for field_name in remove_fields:
                 self.fields.pop(field_name)
 
@@ -41,35 +40,31 @@ class ContactSerializer(serializers.ModelSerializer):
             relationship.save()
             return contact
 
+    def update(self,  instance, validated_data):
 
-    # def update(self,  instance, validated_data):
-    #     company_type_data = validated_data.pop('company_type')
-    #
-    #     instance.company_name = validated_data.get('company_name', instance.company_name)
-    #     instance.company_short_name = validated_data.get('company_short_name', instance.company_short_name)
-    #     instance.company_business_name = validated_data.get('company_business_name', instance.company_business_name)
-    #     instance.company_vat_number = validated_data.get('company_vat_number', instance.company_vat_number)
-    #     instance.company_tax_code = validated_data.get('company_tax_code', instance.company_tax_code)
-    #     instance.company_address = validated_data.get('company_address', instance.company_address)
-    #     instance.company_cap = validated_data.get('company_cap', instance.company_cap)
-    #     instance.company_city = validated_data.get('company_city', instance.company_city)
-    #     instance.company_province = validated_data.get('company_province', instance.company_province)
-    #     instance.company_country = validated_data.get('company_country', instance.company_country)
-    #     instance.company_phone_number = validated_data.get('company_phone_number', instance.company_phone_number)
-    #     instance.company_fax = validated_data.get('company_fax', instance.company_fax)
-    #     instance.company_website = validated_data.get('company_website', instance.company_website)
-    #     instance.company_notes = validated_data.get('company_notes', instance.company_notes)
-    #     instance.company_type.clear()
-    #     for item in company_type_data:
-    #         try:
-    #             company_type = CompanyType.objects.get(id=item['id'])
-    #         except Exception as e:
-    #             raise serializers.ValidationError({'company_type': ["Invalid company type"]})
-    #         instance.company_type.add(company_type)
-    #     instance.save()
-    #     return instance
+        contact_role_data = validated_data.pop('role')
 
+        instance.contact_username = validated_data.get('contact_username', instance.contact_username)
+        instance.contact_first_name = validated_data.get('contact_first_name', instance.contact_first_name)
+        instance.contact_last_name = validated_data.get('contact_last_name', instance.contact_last_name)
+        instance.contact_email = validated_data.get('contact_email', instance.contact_email)
+        instance.contact_phone = validated_data.get('contact_phone', instance.contact_phone)
+        instance.contact_notes = validated_data.get('contact_notes', instance.contact_notes)
 
+        for item in contact_role_data['relations']:
+            try:
+                relationship = CCRelation.objects.filter(company__company_custom_id=item['company']['company_custom_id'], contact_type__type_name=item['role'], contact=instance)
+                if not relationship:
+                    try:
+                        company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
+                        contact_type = ContactType.objects.get(type_name=item['role'])
+                        CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
+                    except Exception as e:
+                        raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
+            except Exception as e:
+                raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
+        instance.save()
+        return instance
 
     class Meta:
         model = Contact
