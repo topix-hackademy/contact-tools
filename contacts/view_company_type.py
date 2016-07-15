@@ -33,16 +33,16 @@ def single_company_type(request, id, format=None):
     Retrieve, update or delete a snippet instance.
     """
     try:
-        contact = Contact.objects.get(id=id)
-    except Contact.DoesNotExist:
+        company_type = CompanyType.objects.get(id=id)
+    except CompanyType.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = ContactSerializer(contact)
+        serializer = CompanyTypeSerializer(company_type)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = ContactSerializer(contact, data=request.data)
+        serializer = CompanyTypeSerializer(company_type, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

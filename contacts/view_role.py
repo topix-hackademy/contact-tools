@@ -14,8 +14,8 @@ def all_roles(request,format=None, *args, **kwargs):
     List all snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        contacts = ContactType.objects.all()
-        serializer = ContactTypeSerializer(contacts, many=True)
+        roles = ContactType.objects.all()
+        serializer = ContactTypeSerializer(roles, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -33,16 +33,16 @@ def single_role(request, id, format=None):
     Retrieve, update or delete a snippet instance.
     """
     try:
-        contact = Contact.objects.get(id=id)
-    except Contact.DoesNotExist:
+        role = ContactType.objects.get(id=id)
+    except ContactType.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = ContactSerializer(contact)
+        serializer = ContactTypeSerializer(role)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = ContactSerializer(contact, data=request.data)
+        serializer = ContactTypeSerializer(role, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
