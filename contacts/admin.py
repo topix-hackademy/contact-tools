@@ -99,5 +99,7 @@ class CCRelationAdmin(admin.ModelAdmin):
         ('CC Relation', {'fields': ['company', 'contact', 'contact_type']})
     ]
     list_display = ('company', 'contact', 'contact_type')
+    list_filter = ['contact_type']
+    search_fields = ['company', 'contact']
 
 admin.site.register(CCRelation, CCRelationAdmin)
