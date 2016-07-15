@@ -62,6 +62,8 @@ def create_superuser():
 def start():
     local('python manage.py runserver 0.0.0.0:8000')
 
+def run_test():
+    local('python manage.py test contacts')
 
 ####################################
 ########## DOCUMENTATION ###########

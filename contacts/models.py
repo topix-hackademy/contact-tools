@@ -65,6 +65,7 @@ class Company(models.Model):
 
     class Meta:
         ordering = ('company_name',)
+        verbose_name_plural = "Companies"
 
     @property
     def contacts(self):
@@ -97,6 +98,7 @@ class Contact(models.Model):
 
     class Meta:
         ordering = ('contact_email',)
+        verbose_name_plural = "Contacts"
 
     @property
     def role(self):
@@ -120,7 +122,8 @@ class CCRelation(models.Model):
         return self.company.company_short_name + " - " + self.contact.contact_username \
                + " - " + self.contact_type.type_name
 
-
+    class Meta:
+        verbose_name_plural = "CCRelations"
 
 @python_2_unicode_compatible
 class Service(models.Model):
@@ -139,3 +142,4 @@ class Service(models.Model):
 
     class Meta:
         ordering = ('service_name',)
+        verbose_name_plural = "Services"
