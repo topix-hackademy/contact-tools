@@ -4,7 +4,7 @@
     
     <url>
      <loc>http://top-ix.org/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,31 +13,53 @@
         
     <url>
      <loc>http://top-ix.org/datamodel/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/company/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/contact/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/relation/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/service/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>http://top-ix.org/api/</loc>
+     <lastmod>2016-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://top-ix.org/api/company/</loc>
+     <lastmod>2016-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://top-ix.org/api/contact/</loc>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -45,16 +67,8 @@
 
     
     <url>
-     <loc>http://top-ix.org/api/</loc>
-     <lastmod>2016-07-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
      <loc>http://top-ix.org/deploy/</loc>
-     <lastmod>2016-07-14</lastmod>
+     <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

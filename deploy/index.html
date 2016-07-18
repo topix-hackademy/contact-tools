@@ -227,10 +227,37 @@
           
             
   <li>
-    <a class="" title="API" href="../api/">
-      API
+    <span class="section">API</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="Home" href="../api/">
+      Home
     </a>
     
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Company" href="../api/company/">
+      Company
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Contact" href="../api/contact/">
+      Contact
+    </a>
+    
+  </li>
+
+      
+    </ul>
   </li>
 
           
@@ -279,6 +306,12 @@
             <li class="anchor">
               <a title="Download and setup APP Django" href="#download-and-setup-app-django">
                 Download and setup APP Django
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Setup Static Files" href="#setup-static-files">
+                Setup Static Files
               </a>
             </li>
           
@@ -336,6 +369,16 @@ pip install MySQL-python
 <h2 id="download-and-setup-app-django">Download and setup APP Django</h2>
 <p>Use GIT to download the app inside folder <code>/var/www/</code>, then create a virtualenv. 
 After that install inside the virtualenv the requirements (infos are on Readme.md).</p>
+<p>Remember to change the setting file in according with you policy and deploy strategy.</p>
+<p>To be sure to avoid security problem you can read the deploy checklist:</p>
+<pre><code>python manage.py check --deploy 
+</code></pre>
+
+<h2 id="setup-static-files">Setup Static Files</h2>
+<p>Every time there is an update, we need to reload the static files (using fabric from the root of the project. <strong>ONLY IN PRODUCTION</strong>):</p>
+<pre><code>fab install_static
+</code></pre>
+
 <h2 id="create-virtualhost">Create VirtualHost</h2>
 <p>Here a base example of virtualhost:</p>
 <pre><code>  &lt;VirtualHost *:80&gt;
@@ -398,7 +441,7 @@ service apache2 reload
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../api/" title="API">
+        <a href="../api/contact/" title="Contact">
           <span class="direction">
             Previous
           </span>
@@ -408,7 +451,7 @@ service apache2 reload
             </div>
             <div class="stretch">
               <div class="title">
-                API
+                Contact
               </div>
             </div>
           </div>
