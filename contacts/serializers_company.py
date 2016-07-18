@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company, CompanyType, Contact
+from .models import Company, CompanyType
 
 
 class CompanyTypeSerializer(serializers.ModelSerializer):
@@ -29,8 +29,7 @@ class CompanySerializer(serializers.ModelSerializer):
         for item in company_type_data:
             try:
                 company_type = CompanyType.objects.get(id=item['id'])
-            except Exception as e:
-                print e
+            except:
                 company.delete()
                 raise serializers.ValidationError({'company_type': ["Invalid company type"]})
             company.company_type.add(company_type)
@@ -58,7 +57,7 @@ class CompanySerializer(serializers.ModelSerializer):
         for item in company_type_data:
             try:
                 company_type = CompanyType.objects.get(id=item['id'])
-            except Exception as e:
+            except:
                 raise serializers.ValidationError({'company_type': ["Invalid company type"]})
             instance.company_type.add(company_type)
         instance.save()
@@ -66,7 +65,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('id','company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
-                  'company_vat_number', 'company_tax_code', 'company_address','company_cap','company_city',
-                  'company_province','company_country', 'company_phone_number', 'company_fax', 'company_website',
-                  'company_notes', 'creation_date', 'company_type','contacts')
+        fields = ('id', 'company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
+                  'company_vat_number', 'company_tax_code', 'company_address', 'company_cap', 'company_city',
+                  'company_province', 'company_country', 'company_phone_number', 'company_fax', 'company_website',
+                  'company_notes', 'creation_date', 'company_type', 'contacts')
