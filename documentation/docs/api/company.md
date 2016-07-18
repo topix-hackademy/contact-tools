@@ -2,7 +2,7 @@
 
 All the resources for the company model are reachable at this endpoint:
 
-    /api/v1/company
+    /api/v1/company/
     
 ## Collection Resources
 
@@ -14,9 +14,22 @@ All the resources for the company model are reachable at this endpoint:
 | PUT   | Update| Update the company, all fields|
 | DELETE|   X   | Delete is not implemented. To delete a resource use PUT verb and change the field `is_valid` |
 
+## Error Management
+
+In case of content error you will receive a `400 Bad Request` with a message like:
+
+    {
+      "company_type": [
+        "This field is required."
+      ],
+      "company_tax_code": [
+        "Company with this Tax Code already exists."
+      ]
+    }
+
 ## GET ALL
 
-    GET /api/v1/company
+    GET /api/v1/company/
     
 Example of output:
 
@@ -53,7 +66,7 @@ Example of output:
     
 ## GET ONE
 
-    GET /api/v1/company/{id-resource}
+    GET /api/v1/company/{id-resource}/
     
 Example of output:
 

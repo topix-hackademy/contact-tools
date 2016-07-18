@@ -6,7 +6,7 @@ from .serializers_company import CompanyTypeSerializer
 class ContactTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactType
-        fields = ('id','type_name', 'is_valid', 'creation_date')
+        fields = ('id', 'type_name', 'is_valid', 'creation_date')
         extra_kwargs = {'id': {'read_only': False}}
 
 
@@ -29,12 +29,12 @@ class ContactSerializer(serializers.ModelSerializer):
         for item in contact_role_data['relations']:
             print item
             try:
-                company = Company.objects.get(company_custom_id = item['company']['company_custom_id'])
-                contact_type = ContactType.objects.get(type_name = item['role'])
-                relationship = CCRelation.objects.create(company=company,contact_type=contact_type, contact = contact)
+                company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
+                contact_type = ContactType.objects.get(type_name=item['role'])
+                relationship = CCRelation.objects.create(company=company, contact_type=contact_type, contact=contact)
             except Exception as e:
                 contact.delete()
-                raise serializers.ValidationError({'company_type': ["Invalid company type"]})
+                raise serializers.ValidationError({'company_type': ["Invalid role"]})
 
             contact.save()
             relationship.save()
