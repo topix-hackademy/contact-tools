@@ -6,7 +6,11 @@ Through APIs we perform access to Contact and Company data models. Check this tw
 
 * [Company](/api/company)
 
+* [Company Type](/api/company_type)
+
 * [Contact](/api/contact)
+
+* [Contact Type](/api/contact_type)
 
 ## Version 
 
