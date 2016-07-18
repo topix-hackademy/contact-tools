@@ -20,6 +20,8 @@ pages:
 
 - ['api/index.md', 'API']
 - ['api/company.md', 'API', 'Company']
+- ['api/company_type.md', 'API', 'Company Type']
 - ['api/contact.md', 'API', 'Contact']
+- ['api/contact_type.md', 'API', 'Contact Type']
 
 - ['deploy/index.md', 'DEPLOY']
