@@ -5,7 +5,7 @@ from .models import Company, CompanyType, Contact
 class CompanyTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompanyType
-        fields = ('id','type_name', 'is_valid', 'creation_date')
+        fields = ('id', 'type_name', 'is_valid', 'creation_date')
         extra_kwargs = {'id': {'read_only': False}}
 
 
@@ -26,18 +26,18 @@ class CompanySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         company_type_data = validated_data.pop('company_type')
         company = Company.objects.create(**validated_data)
-
         for item in company_type_data:
             try:
                 company_type = CompanyType.objects.get(id=item['id'])
             except Exception as e:
+                print e
                 company.delete()
                 raise serializers.ValidationError({'company_type': ["Invalid company type"]})
             company.company_type.add(company_type)
         company.save()
         return company
 
-    def update(self,  instance, validated_data):
+    def update(self, instance, validated_data):
         company_type_data = validated_data.pop('company_type')
 
         instance.company_name = validated_data.get('company_name', instance.company_name)

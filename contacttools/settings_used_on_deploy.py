@@ -25,7 +25,7 @@ SECRET_KEY = '0^c!v%y!b=fadbio_qbcgpx)3ku_sf4x7fxouod=&!n%6ujq70'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["contacts.top-ix.org"]
+ALLOWED_HOSTS = ["WEBSITE-URLS"]
 
 STATIC_ROOT = '/var/www/contact-tools/static_root'
 
@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'contacts',
         'USER': 'contacts',
-        'PASSWORD': 'YLxHR9J8rJsonJP4',
+        'PASSWORD': '---DB-PWD---',
         'OPTIONS': {
             'autocommit': True,
         }
