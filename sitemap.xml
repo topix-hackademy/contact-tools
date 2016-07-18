@@ -58,7 +58,19 @@
     </url>
         
     <url>
+     <loc>http://top-ix.org/api/company_type/</loc>
+     <lastmod>2016-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>http://top-ix.org/api/contact/</loc>
+     <lastmod>2016-07-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://top-ix.org/api/contact_type/</loc>
      <lastmod>2016-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
