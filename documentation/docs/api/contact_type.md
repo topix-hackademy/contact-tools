@@ -74,7 +74,7 @@ Example of output:
 
 ## UPDATE
 
-    PUT /api/v1/contact/{id-resource}/
+    PUT /api/v1/role/{id-resource}/
 
 Example of input body:
 
