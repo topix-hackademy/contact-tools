@@ -25,7 +25,7 @@ class CompanyType(models.Model):
 
 @python_2_unicode_compatible
 class ContactType(models.Model):
-    type_name = models.CharField('Contact Type', max_length=200)
+    type_name = models.CharField('Contact Type', max_length=200, unique=True)
     is_valid = models.BooleanField('Is Valid', default=True)
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
 

@@ -15,7 +15,6 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
     class Meta:
         model = CompanyType
         fields = ('id', 'type_name', 'is_valid', 'creation_date')

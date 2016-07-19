@@ -4,10 +4,21 @@ from .serializers_company import CompanyTypeSerializer
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        contact_role = ContactType.objects.create(**validated_data)
+        contact_role.save()
+        return contact_role
+
+    def update(self, instance, validated_data):
+        instance.type_name = validated_data.get('type_name', instance.type_name)
+        instance.is_valid = validated_data.get('is_valid', instance.is_valid)
+        instance.save()
+        return instance
+
     class Meta:
         model = ContactType
         fields = ('id', 'type_name', 'is_valid', 'creation_date')
-        extra_kwargs = {'id': {'read_only': False}}
+        extra_kwargs = {'id': {'read_only': True}}
 
 
 class ContactSerializer(serializers.ModelSerializer):
