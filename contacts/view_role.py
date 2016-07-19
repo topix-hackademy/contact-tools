@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from .models import ContactType
 from .serializers_contact import ContactTypeSerializer
-from .helper import auth_decorator
+from .helper import auth_decorator, response_404, response_400
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -35,7 +35,7 @@ def single_role(request, id, format=None):
     try:
         role = ContactType.objects.get(id=id)
     except ContactType.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return response_404()
 
     if request.method == 'GET':
         serializer = ContactTypeSerializer(role)
@@ -49,4 +49,4 @@ def single_role(request, id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return response_400()

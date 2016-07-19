@@ -3,10 +3,23 @@ from .models import Company, CompanyType
 
 
 class CompanyTypeSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        company_type = CompanyType.objects.create(**validated_data)
+        company_type.save()
+        return company_type
+
+    def update(self, instance, validated_data):
+        instance.type_name = validated_data.get('type_name', instance.type_name)
+        instance.is_valid = validated_data.get('is_valid', instance.is_valid)
+        instance.save()
+        return instance
+
+
     class Meta:
         model = CompanyType
         fields = ('id', 'type_name', 'is_valid', 'creation_date')
-        extra_kwargs = {'id': {'read_only': False}}
+        extra_kwargs = {'id': {'read_only': True}}
 
 
 class CompanySerializer(serializers.ModelSerializer):

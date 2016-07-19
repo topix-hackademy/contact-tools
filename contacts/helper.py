@@ -25,3 +25,11 @@ def auth_decorator(f):
         return f(request, *args, **kwargs)
 
     return inner
+
+
+def response_404(message=None):
+    return Response(status=status.HTTP_404_NOT_FOUND, data={'message': 'Resource not found'})
+
+
+def response_400(message=None):
+    return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Bad request'})
