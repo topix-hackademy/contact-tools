@@ -280,6 +280,46 @@
         
       
       
+        <ul>
+          
+            <li class="anchor">
+              <a title="Collection Resources" href="#collection-resources">
+                Collection Resources
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Error Management" href="#error-management">
+                Error Management
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="GET ALL" href="#get-all">
+                GET ALL
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="GET ONE" href="#get-one">
+                GET ONE
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="CREATE" href="#create">
+                CREATE
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="UPDATE" href="#update">
+                UPDATE
+              </a>
+            </li>
+          
+        </ul>
+      
     
   </li>
 
@@ -308,6 +348,108 @@
         <div class="wrapper">
           
           <h1 id="contact-type-api">Contact Type API</h1>
+<p>All the resources for the contact model are reachable at this endpoint:</p>
+<pre><code>/api/v1/role/
+</code></pre>
+<h2 id="collection-resources">Collection Resources</h2>
+<table>
+<thead>
+<tr>
+<th>Verb</th>
+<th>Usage</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>Read</td>
+<td>---</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>Create</td>
+<td>Create a new Contact</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>Update</td>
+<td>Update the Contact, all fields</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>X</td>
+<td>Delete is not implemented. To delete a resource use PUT verb and change the field <code>is_valid</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-management">Error Management</h2>
+<p>In case of content error you will receive a <code>400 Bad Request</code> with a message like:</p>
+<pre><code>{
+  "contact_username": [
+    "This field is required."
+  ]
+}
+</code></pre>
+<h2 id="get-all">GET ALL</h2>
+<pre><code>GET /api/v1/role/
+</code></pre>
+<p>Example of output:</p>
+<pre><code>[
+  {
+    "id": "2",
+    "type_name": "administration",
+    "is_valid": true,
+    "creation_date": "2016-07-13T09:18:11.429000Z"
+  },
+      ...
+]
+</code></pre>
+<h2 id="get-one">GET ONE</h2>
+<pre><code>GET /api/v1/role/{id-resource}/
+</code></pre>
+<p>Example of output:</p>
+<pre><code>{
+  "id": "3",
+  "type_name": "service",
+  "is_valid": true,
+  "creation_date": "2016-07-13T09:18:26.767000Z"
+}
+</code></pre>
+<h2 id="create">CREATE</h2>
+<pre><code>POST /api/v1/role/
+</code></pre>
+<p>Example of input body:</p>
+<pre><code>{
+  "type_name": "service",
+  "is_valid": true
+}
+</code></pre>
+<p>Example of output:</p>
+<pre><code>{
+  "id": "5",
+  "type_name": "service",
+  "is_valid": true,
+  "creation_date": "2016-07-19T10:26:09.769124"
+}
+</code></pre>
+<h2 id="update">UPDATE</h2>
+<pre><code>PUT /api/v1/role/{id-resource}/
+</code></pre>
+<p>Example of input body:</p>
+<pre><code>{
+  "type_name": "service",
+  "is_valid": false
+  }
+</code></pre>
+<p>Example of output:</p>
+<pre><code>{
+  "id": "5",
+  "type_name": "service",
+  "is_valid": false,
+  "creation_date": "2016-07-19T10:26:09.769124Z"
+}
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with
