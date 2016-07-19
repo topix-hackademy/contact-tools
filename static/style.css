@@ -1,4 +1,11 @@
-body {
+.index {
+    background-image: url("/static/background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.not_found {
     background-image: url("/static/background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
