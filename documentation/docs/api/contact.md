@@ -10,7 +10,6 @@ All the resources for the contact model are reachable at this endpoint:
 | :---: | :---: |   ---  |
 | GET   | Read  |   ---  |
 | POST  | Create| Create a new Contact |
-| PUT   | Create| Create a new Contact if does not exists  |
 | PUT   | Update| Update the Contact, all fields|
 | DELETE|   X   | Delete is not implemented. To delete a resource use PUT verb and change the field `is_valid` |
 
