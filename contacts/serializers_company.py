@@ -21,9 +21,16 @@ class CompanyTypeSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': True}}
 
 
+class CompanyTypeReadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyType
+        fields = ('id', 'type_name', 'is_valid', 'creation_date')
+        extra_kwargs = {'id': {'read_only': False}}
+
+
 class CompanySerializer(serializers.ModelSerializer):
 
-    company_type = CompanyTypeSerializer(many=True)
+    company_type = CompanyTypeReadSerializer(many=True)
     contacts = serializers.ReadOnlyField()
 
     def __init__(self, *args, **kwargs):
