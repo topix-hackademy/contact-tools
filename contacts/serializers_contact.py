@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Contact, ContactType, Company, CCRelation
-from .serializers_company import CompanyTypeSerializer
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
@@ -34,16 +33,14 @@ class ContactSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
 
     def create(self, validated_data):
-        print validated_data
         contact_role_data = validated_data.pop('role')
         contact = Contact.objects.create(**validated_data)
         for item in contact_role_data['relations']:
-            print item
             try:
                 company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
                 contact_type = ContactType.objects.get(type_name=item['role'])
                 relationship = CCRelation.objects.create(company=company, contact_type=contact_type, contact=contact)
-            except Exception as e:
+            except:
                 contact.delete()
                 raise serializers.ValidationError({'company_type': ["Invalid role"]})
 
@@ -70,9 +67,9 @@ class ContactSerializer(serializers.ModelSerializer):
                         company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
                         contact_type = ContactType.objects.get(type_name=item['role'])
                         CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
-                    except Exception as e:
+                    except:
                         raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
-            except Exception as e:
+            except:
                 raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
         instance.save()
         return instance

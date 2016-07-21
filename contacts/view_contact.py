@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from .models import Contact
 from .serializers_contact import ContactSerializer
 from .helper import auth_decorator
