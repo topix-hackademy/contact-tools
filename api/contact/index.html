@@ -309,6 +309,12 @@
               </a>
             </li>
           
+            <li class="anchor">
+              <a title="GET ONE BY EMAIL" href="#get-one-by-email">
+                GET ONE BY EMAIL
+              </a>
+            </li>
+          
         </ul>
       
     
@@ -517,6 +523,31 @@
         "company": {
           "company_custom_id": 2,
           "company_name": "Custom Company 2"
+        },
+        "role": "administration"
+      }
+    ]
+  }
+}
+</code></pre>
+<h2 id="get-one-by-email">GET ONE BY EMAIL</h2>
+<pre><code>GET /api/v1/contact-by-email/{email-resource}/
+</code></pre>
+<p>Example of output:</p>
+<pre><code>{
+  "id": 1,
+  "contact_username": "alex",
+  "contact_first_name": "alex",
+  "contact_last_name": "alex",
+  "contact_email": "alex@alex.it",
+  "contact_phone": "312312312",
+  "contact_notes": "",
+  "role": {
+    "relations": [
+      {
+        "company": {
+          "company_custom_id": 1,
+          "company_name": "Custom Company 1"
         },
         "role": "administration"
       }
