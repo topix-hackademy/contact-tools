@@ -165,3 +165,31 @@ Example of output:
         ]
       }
     }
+    
+## GET ONE BY EMAIL
+
+    GET /api/v1/contact-by-email/{email-resource}/
+    
+Example of output:
+
+    {
+      "id": 1,
+      "contact_username": "alex",
+      "contact_first_name": "alex",
+      "contact_last_name": "alex",
+      "contact_email": "alex@alex.it",
+      "contact_phone": "312312312",
+      "contact_notes": "",
+      "role": {
+        "relations": [
+          {
+            "company": {
+              "company_custom_id": 1,
+              "company_name": "Custom Company 1"
+            },
+            "role": "administration"
+          }
+        ]
+      }
+    }
+    
