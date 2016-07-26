@@ -49,3 +49,21 @@ def single_contact(request, id, format=None):
 
     elif request.method == 'DELETE':
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@auth_decorator
+def get_contact_by_email(request, email, format=None):
+    """
+    Retrieve a company by email address
+    """
+    try:
+        contact = Contact.objects.get(contact_email=email)
+    except Contact.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ContactSerializer(contact)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

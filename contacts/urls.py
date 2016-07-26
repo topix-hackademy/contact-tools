@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^company/$', views_company.all_companies),
     url(r'^company/(?P<id>[0-9]+)/$', views_company.single_company),
 
+    url(r'^contact-by-email/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', view_contact.get_contact_by_email),
+
     url(r'^$', views_company.index, name='index'),
 ]
 
