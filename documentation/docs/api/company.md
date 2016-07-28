@@ -209,3 +209,50 @@ Example of output:
         "relations": []
       }
     }
+
+
+## GET ONE BY EMAIL
+
+    GET /api/v1/company-by-code/{code}/
+
+Example of output:
+
+        {
+      "id": "1",
+      "company_custom_id": "1",
+      "company_name": "Custom Company 1",
+      "company_short_name": "Custom Company 1",
+      "company_business_name": "Custom Company 1",
+      "company_vat_number": "12312312",
+      "company_tax_code": null,
+      "company_address": "via vai 1",
+      "company_cap": "123",
+      "company_city": "turin",
+      "company_province": "",
+      "company_country": "italy",
+      "company_phone_number": "2132133112",
+      "company_fax": "",
+      "company_website": "",
+      "company_notes": "",
+      "creation_date": "2016-07-13T09:15:36.633000Z",
+      "company_type": [
+        {
+          "id": "1",
+          "type_name": "IX",
+          "is_valid": true,
+          "creation_date": "2016-07-13T09:15:34.009000Z"
+        }
+      ],
+      "contacts": {
+        "relations": [
+          {
+            "contact": {
+              "contact_email": "alex@alex.it",
+              "id": "3",
+              "contact_username": "alex"
+            },
+            "role": "administration"
+          }
+        ]
+      }
+    }
