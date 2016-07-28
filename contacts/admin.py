@@ -83,7 +83,7 @@ admin.site.register(Company, CompanyAdmin)
 class ContactAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
-        ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),
+        ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
         ('Notes', {'fields': ['contact_notes']})
     ]
     list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')

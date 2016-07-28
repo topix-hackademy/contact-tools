@@ -36,7 +36,9 @@ Example of output:
         "contact_first_name": "alex",
         "contact_last_name": "alex",
         "contact_email": "alex@alex.it",
+        "contact_email_secondary": "asd@asd.com",
         "contact_phone": "312312312",
+        "contact_phone_secondary": "",
         "contact_notes": ""
       },
       ...
@@ -54,7 +56,9 @@ Example of output:
       "contact_first_name": "alex",
       "contact_last_name": "alex",
       "contact_email": "alex@alex.it",
+      "contact_email_secondary": "asd@asd.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "",
       "contact_notes": "",
       "role": {
         "relations": [
@@ -80,7 +84,9 @@ Example of input body:
       "contact_first_name": "alex",
       "contact_last_name": "alex",
       "contact_email": "new@user.it",
+      "contact_email": "secondary@email.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "111111",
       "contact_notes": "",
       "role": {
         "relations": [
@@ -102,8 +108,9 @@ Example of output:
       "contact_username": "newuser",
       "contact_first_name": "alex",
       "contact_last_name": "alex",
-      "contact_email": "new@user.it",
+      "contact_email": "secondary@email.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "111111",
       "contact_notes": "",
       "role": {
         "relations": [
@@ -128,8 +135,9 @@ Example of input body:
       "contact_username": "newuser",
       "contact_first_name": "alexXXXXX",
       "contact_last_name": "alex",
-      "contact_email": "new@user.it",
+      "contact_email": "secondary@email.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "111111",
       "contact_notes": "",
       "role": {
         "relations": [
@@ -150,8 +158,9 @@ Example of output:
       "contact_username": "newuser",
       "contact_first_name": "alexXXXXX",
       "contact_last_name": "alex",
-      "contact_email": "new@user.it",
+      "contact_email": "secondary@email.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "111111",
       "contact_notes": "",
       "role": {
         "relations": [
@@ -177,8 +186,9 @@ Example of output:
       "contact_username": "alex",
       "contact_first_name": "alex",
       "contact_last_name": "alex",
-      "contact_email": "alex@alex.it",
+      "contact_email": "secondary@email.com",
       "contact_phone": "312312312",
+      "contact_phone_secondary": "111111",
       "contact_notes": "",
       "role": {
         "relations": [

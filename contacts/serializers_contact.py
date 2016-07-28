@@ -56,7 +56,9 @@ class ContactSerializer(serializers.ModelSerializer):
         instance.contact_first_name = validated_data.get('contact_first_name', instance.contact_first_name)
         instance.contact_last_name = validated_data.get('contact_last_name', instance.contact_last_name)
         instance.contact_email = validated_data.get('contact_email', instance.contact_email)
+        instance.contact_email_secondary = validated_data.get('contact_email_secondary', instance.contact_email_secondary)
         instance.contact_phone = validated_data.get('contact_phone', instance.contact_phone)
+        instance.contact_phone_secondary = validated_data.get('contact_phone_secondary', instance.contact_phone_secondary)
         instance.contact_notes = validated_data.get('contact_notes', instance.contact_notes)
 
         for item in contact_role_data['relations']:
@@ -76,5 +78,5 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ('id', 'contact_username', 'contact_first_name', 'contact_last_name', 'contact_email',
-                  'contact_phone', 'contact_notes', 'role')
+        fields = ('id', 'contact_username', 'contact_first_name', 'contact_last_name', 'contact_email', 'contact_email_secondary',
+                  'contact_phone', 'contact_phone_secondary', 'contact_notes', 'role')

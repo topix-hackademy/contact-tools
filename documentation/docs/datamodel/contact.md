@@ -10,7 +10,9 @@ For each Contact we save this list of attributes:
 |contact_first_name     | True      |  CHAR   | First Name of the Contacts|
 |contact_last_name      | True      |  CHAR   | Last Name of the Contacts|
 |contact_email          | False     |  EMAIL  | Email of the Contacts|
+|contact_email_secondary | True     |  EMAIL  | Secondary Email of the Contacts|
 |contact_phone          | True      |  CHAR   | Phone Number of the Contacts|
+|contact_phone_secondary | True      |  CHAR   | Secondary Phone Number of the Contacts|
 |contact_notes          | True      |  TEXT   | Notes about of the Contacts|
 |creation_date          | False     |  DATETIME   | Creation Date|
 
@@ -21,7 +23,7 @@ Here the code used to Register the Admin Form for table **Contact** in the Admin
     class ContactAdmin(admin.ModelAdmin):
         fieldsets = [
             ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
-            ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),
+            ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
             ('Notes', {'fields': ['contact_notes']})
         ]
         list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')
