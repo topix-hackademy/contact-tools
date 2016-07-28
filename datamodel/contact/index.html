@@ -355,10 +355,22 @@
 <td>Email of the Contacts</td>
 </tr>
 <tr>
+<td align="left">contact_email_secondary</td>
+<td>True</td>
+<td>EMAIL</td>
+<td>Secondary Email of the Contacts</td>
+</tr>
+<tr>
 <td align="left">contact_phone</td>
 <td>True</td>
 <td>CHAR</td>
 <td>Phone Number of the Contacts</td>
+</tr>
+<tr>
+<td align="left">contact_phone_secondary</td>
+<td>True</td>
+<td>CHAR</td>
+<td>Secondary Phone Number of the Contacts</td>
 </tr>
 <tr>
 <td align="left">contact_notes</td>
@@ -379,7 +391,7 @@
 <pre><code>class ContactAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
-        ('Contact Address', {'fields': ['contact_email', 'contact_phone']}),
+        ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
         ('Notes', {'fields': ['contact_notes']})
     ]
     list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')
