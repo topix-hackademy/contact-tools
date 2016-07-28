@@ -5,6 +5,7 @@ from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.db.models import Q
 
 
 def index(request):
@@ -53,4 +54,23 @@ def single_company(request, id, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@auth_decorator
+def get_company_by_code(request, code, format=None):
+    """
+    Retrieve a company by code
+    """
+    try:
+        company = Company.objects.filter(Q(company_vat_number=code) | Q( company_tax_code=code)).get()
+        print company
+    except Company.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = CompanySerializer(company)
+        return Response(serializer.data)
+    else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
