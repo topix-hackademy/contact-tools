@@ -33,3 +33,6 @@ def response_404(message=None):
 
 def response_400(message=None):
     return Response(status=status.HTTP_400_BAD_REQUEST, data={'message': 'Bad request'})
+
+def return_oldvalue_if_empty(newvalue, oldvalue):
+    return newvalue if newvalue else oldvalue

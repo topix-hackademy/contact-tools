@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Contact, ContactType, Company, CCRelation
+from .helper import return_oldvalue_if_empty
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
@@ -40,7 +41,8 @@ class ContactSerializer(serializers.ModelSerializer):
                 company = Company.objects.get(id=item['company']['id'])
                 contact_type = ContactType.objects.get(type_name=item['role'])
                 relationship = CCRelation.objects.create(company=company, contact_type=contact_type, contact=contact)
-            except:
+            except Exception as e:
+                print e
                 contact.delete()
                 raise serializers.ValidationError({'company_type': ["Invalid role"]})
 
@@ -52,29 +54,34 @@ class ContactSerializer(serializers.ModelSerializer):
 
         contact_role_data = validated_data.pop('role')
 
-        instance.contact_username = validated_data.get('contact_username', instance.contact_username)
-        instance.contact_first_name = validated_data.get('contact_first_name', instance.contact_first_name)
-        instance.contact_last_name = validated_data.get('contact_last_name', instance.contact_last_name)
-        instance.contact_email = validated_data.get('contact_email', instance.contact_email)
-        instance.contact_email_secondary = validated_data.get('contact_email_secondary',
-                                                              instance.contact_email_secondary)
-        instance.contact_phone = validated_data.get('contact_phone', instance.contact_phone)
-        instance.contact_phone_secondary = validated_data.get('contact_phone_secondary',
-                                                              instance.contact_phone_secondary)
-        instance.contact_notes = validated_data.get('contact_notes', instance.contact_notes)
+        instance.contact_username = return_oldvalue_if_empty(validated_data.get('contact_username', ""),
+                                                             instance.contact_username)
+        instance.contact_first_name = return_oldvalue_if_empty(validated_data.get('contact_first_name', ""),
+                                                               instance.contact_first_name)
+        instance.contact_last_name = return_oldvalue_if_empty(validated_data.get('contact_last_name', ""),
+                                                              instance.contact_last_name)
+        instance.contact_email = return_oldvalue_if_empty(validated_data.get('contact_email', ""),
+                                                          instance.contact_email)
+        instance.contact_email_secondary = return_oldvalue_if_empty(validated_data.get('contact_email_secondary', ""),
+                                                                    instance.contact_email_secondary)
+        instance.contact_phone = return_oldvalue_if_empty(validated_data.get('contact_phone', ""),
+                                                          instance.contact_phone)
+        instance.contact_phone_secondary = return_oldvalue_if_empty(validated_data.get('contact_phone_secondary', ""),
+                                                                    instance.contact_phone_secondary)
+        instance.contact_notes = return_oldvalue_if_empty(validated_data.get('contact_notes', ""),
+                                                          instance.contact_notes)
 
         for item in contact_role_data['relations']:
             try:
-                relationship = CCRelation.objects.filter(company__id=item['company']['id'],
-                                                         contact_type__type_name=item['role'], contact=instance)
-                if not relationship:
-                    try:
-                        company = Company.objects.get(id=item['company']['id'])
-                        contact_type = ContactType.objects.get(type_name=item['role'])
-                        CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
-                    except:
-                        raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
-            except:
+                relationship = CCRelation.objects.filter(company__id=item['company']['id'], contact=instance)
+                contact_type = ContactType.objects.get(type_name=item['role'])
+                company = Company.objects.get(id=item['company']['id'])
+                if relationship:
+                    relationship.delete()
+                CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
+
+            except Exception as e:
+                print e
                 raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
         instance.save()
         return instance
