@@ -37,7 +37,7 @@ class ContactSerializer(serializers.ModelSerializer):
         contact = Contact.objects.create(**validated_data)
         for item in contact_role_data['relations']:
             try:
-                company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
+                company = Company.objects.get(id=item['company']['id'])
                 contact_type = ContactType.objects.get(type_name=item['role'])
                 relationship = CCRelation.objects.create(company=company, contact_type=contact_type, contact=contact)
             except:
@@ -63,10 +63,10 @@ class ContactSerializer(serializers.ModelSerializer):
 
         for item in contact_role_data['relations']:
             try:
-                relationship = CCRelation.objects.filter(company__company_custom_id=item['company']['company_custom_id'], contact_type__type_name=item['role'], contact=instance)
+                relationship = CCRelation.objects.filter(company__id=item['company']['id'], contact_type__type_name=item['role'], contact=instance)
                 if not relationship:
                     try:
-                        company = Company.objects.get(company_custom_id=item['company']['company_custom_id'])
+                        company = Company.objects.get(id=item['company']['id'])
                         contact_type = ContactType.objects.get(type_name=item['role'])
                         CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
                     except:
