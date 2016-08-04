@@ -107,7 +107,7 @@ class Contact(models.Model):
         relations = []
         for rel in self.ccrelation_set.all():
             relations.append({"role": rel.contact_type.type_name,
-                              "company": {"company_custom_id": rel.company.company_custom_id, "company_name":rel.company.company_name}})
+                              "company": {"id": rel.company.id, "company_name": rel.company.company_name}})
         return {"relations": relations}
 
 
@@ -126,6 +126,7 @@ class CCRelation(models.Model):
 
     class Meta:
         verbose_name_plural = "CCRelations"
+
 
 @python_2_unicode_compatible
 class Service(models.Model):

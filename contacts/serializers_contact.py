@@ -56,14 +56,17 @@ class ContactSerializer(serializers.ModelSerializer):
         instance.contact_first_name = validated_data.get('contact_first_name', instance.contact_first_name)
         instance.contact_last_name = validated_data.get('contact_last_name', instance.contact_last_name)
         instance.contact_email = validated_data.get('contact_email', instance.contact_email)
-        instance.contact_email_secondary = validated_data.get('contact_email_secondary', instance.contact_email_secondary)
+        instance.contact_email_secondary = validated_data.get('contact_email_secondary',
+                                                              instance.contact_email_secondary)
         instance.contact_phone = validated_data.get('contact_phone', instance.contact_phone)
-        instance.contact_phone_secondary = validated_data.get('contact_phone_secondary', instance.contact_phone_secondary)
+        instance.contact_phone_secondary = validated_data.get('contact_phone_secondary',
+                                                              instance.contact_phone_secondary)
         instance.contact_notes = validated_data.get('contact_notes', instance.contact_notes)
 
         for item in contact_role_data['relations']:
             try:
-                relationship = CCRelation.objects.filter(company__id=item['company']['id'], contact_type__type_name=item['role'], contact=instance)
+                relationship = CCRelation.objects.filter(company__id=item['company']['id'],
+                                                         contact_type__type_name=item['role'], contact=instance)
                 if not relationship:
                     try:
                         company = Company.objects.get(id=item['company']['id'])

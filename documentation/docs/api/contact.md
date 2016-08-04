@@ -64,7 +64,7 @@ Example of output:
         "relations": [
           {
             "company": {
-              "company_custom_id": 1,
+              "id": 1,
               "company_name": "Custom Company 1"
             },
             "role": "administration"
@@ -92,7 +92,7 @@ Example of input body:
         "relations": [
           {
             "company": {
-              "company_custom_id": 2,
+              "id": 2,
               "company_name": "Custom Company 2"
             },
             "role": "administration"
@@ -116,7 +116,7 @@ Example of output:
         "relations": [
           {
             "company": {
-              "company_custom_id": 2,
+              "id": 2,
               "company_name": "Custom Company 2"
             },
             "role": "administration"
@@ -143,7 +143,7 @@ Example of input body:
         "relations": [
           {
             "company": {
-              "company_custom_id": 2,
+              "id": 2,
               "company_name": "Custom Company 2"
             },
             "role": "administration"
@@ -166,7 +166,7 @@ Example of output:
         "relations": [
           {
             "company": {
-              "company_custom_id": 2,
+              "id": 2,
               "company_name": "Custom Company 2"
             },
             "role": "administration"
@@ -194,7 +194,7 @@ Example of output:
         "relations": [
           {
             "company": {
-              "company_custom_id": 1,
+              "id": 1,
               "company_name": "Custom Company 1"
             },
             "role": "administration"
