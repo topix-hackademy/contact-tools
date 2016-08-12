@@ -39,7 +39,7 @@ class ContactType(models.Model):
 @python_2_unicode_compatible
 class Company(models.Model):
 
-    company_custom_id = models.IntegerField('Custom ID', null=True)
+    company_custom_id = models.IntegerField('Custom ID', null=True, blank=True)
     company_name = models.CharField('Company Name', max_length=200, null=False)
     company_short_name = models.CharField('Company Short Name', max_length=200, null=False)
     company_business_name = models.CharField('Company Business Name', max_length=200, null=False)
