@@ -9,7 +9,7 @@ For each Contact we save this list of attributes:
 |contact_username       | False     |  CHAR   | Username of the Contacts|
 |contact_first_name     | True      |  CHAR   | First Name of the Contacts|
 |contact_last_name      | True      |  CHAR   | Last Name of the Contacts|
-|contact_email          | False     |  EMAIL  | Email of the Contacts|
+|contact_email          | True     |  EMAIL  | Email of the Contacts|
 |contact_email_secondary | True     |  EMAIL  | Secondary Email of the Contacts|
 |contact_phone          | True      |  CHAR   | Phone Number of the Contacts|
 |contact_phone_secondary | True      |  CHAR   | Secondary Phone Number of the Contacts|
