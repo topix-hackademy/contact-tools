@@ -32,6 +32,9 @@ STATIC_ROOT = '/var/www/contact-tools/static_root'
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.frontend',
+    'material.admin',
     'rest_framework',
     'contacts.apps.ContactsConfig',
     'django.contrib.admin',
