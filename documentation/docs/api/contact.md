@@ -175,31 +175,40 @@ Example of output:
       }
     }
     
-## GET ONE BY EMAIL
+## GET BY EMAIL
 
     GET /api/v1/contact-by-email/{email-resource}/
     
 Example of output:
 
-    {
-      "id": 1,
-      "contact_username": "alex",
-      "contact_first_name": "alex",
-      "contact_last_name": "alex",
-      "contact_email": "secondary@email.com",
-      "contact_phone": "312312312",
-      "contact_phone_secondary": "111111",
-      "contact_notes": "",
-      "role": {
-        "relations": [
-          {
-            "company": {
-              "id": 1,
-              "company_name": "Custom Company 1"
-            },
-            "role": "administration"
-          }
-        ]
+    [
+      {
+        "id": 1,
+        "contact_username": "pippoPLuto",
+        "contact_first_name": "qweqwe\\",
+        "contact_last_name": "asfcvzxcvv",
+        "contact_email": "alex.comunian@top-ix.org",
+        "contact_email_secondary": "alex.comunian@top-ix.org",
+        "contact_phone": "0118390191",
+        "contact_phone_secondary": "0118390191",
+        "contact_notes": "",
+        "role": {
+          "relations": []
+        }
+      },
+      {
+        "id": 2,
+        "contact_username": "ciccio pasticcio",
+        "contact_first_name": "asd",
+        "contact_last_name": "asd",
+        "contact_email": "alex.comunian@top-ix.org",
+        "contact_email_secondary": "alex.comunian@top-ix.org",
+        "contact_phone": "0118390191",
+        "contact_phone_secondary": "0118390191",
+        "contact_notes": "",
+        "role": {
+          "relations": []
+        }
       }
-    }
+    ]
     

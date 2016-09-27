@@ -4,7 +4,7 @@ from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from django.http import JsonResponse
 
 @api_view(['GET','POST'])
 @auth_decorator
@@ -58,12 +58,11 @@ def get_contact_by_email(request, email, format=None):
     Retrieve a company by email address
     """
     try:
-        contact = Contact.objects.get(contact_email=email)
+        contact = Contact.objects.filter(contact_email=email)
     except Contact.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
     if request.method == 'GET':
-        serializer = ContactSerializer(contact)
+        serializer = ContactSerializer(contact, many=True)
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
