@@ -65,7 +65,7 @@ admin.site.register(Service, ServiceAdmin)
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',
-                                     'company_business_name', 'company_vat_number', 'company_tax_code']}),
+                                     'company_business_name', 'company_logo', 'company_vat_number', 'company_tax_code']}),
         ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
                                         'company_country']}),
         ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
