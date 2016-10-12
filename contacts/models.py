@@ -55,6 +55,8 @@ class Company(models.Model):
     company_website = models.CharField('WebSite', max_length=200, null=True, blank=True)
     company_notes = models.TextField('Notes', null=True, blank=True)
     company_is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
+    
+    company_logo = models.ImageField(upload_to='documents/', default='None')
 
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
     # Company Type relation
