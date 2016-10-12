@@ -7,12 +7,12 @@ For each Company we save this list of attributes:
 
 |FIELD NAME | NULLABLE | TYPE | DESCRIPTION|
 |:----------- | :-----------: | :-----------: | :-----------|
-|company_custom_id       | False      |  INT           | Unique Custom ID|
+|company_custom_id       | False      |  INT           | Custom ID on external systems (eg. ESolver)|
 |company_name            | False      |  CHAR          | Name of the Company|
 |company_short_name      | False      |  CHAR          | Short Name of the Company|
 |company_business_name   | False      |  CHAR          | Unique Name of the Company|
-|company_vat_number      | True       |  INT           | VAT Number|
-|company_tax_code        | True       |  INT           | TAX Code|
+|company_vat_number      | True       |  INT           | VAT Number (eg. partita IVA)|
+|company_tax_code        | True       |  INT           | TAX Code (eg. codice fiscale)|
 |company_address         | False      |  CHAR          | Address of the Company|
 |company_cap             | False      |  CHAR          | CAP Address of the Company|
 |company_city            | False      |  CHAR          | City of the Company|
