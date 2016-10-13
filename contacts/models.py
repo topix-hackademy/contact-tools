@@ -70,6 +70,12 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
+        
+    def image_field(self):
+        if self.company_logo:
+            return self.company_logo_thumbnail
+        else:
+            return None
 
     class Meta:
         ordering = ('company_name',)
