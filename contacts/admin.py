@@ -1,6 +1,8 @@
 from django.contrib import admin
 import datetime
 
+from imagekit.admin import AdminThumbnail
+
 ## My Models
 from .models import CompanyType, Service, Company, Contact, ContactType, CCRelation
 
@@ -64,8 +66,10 @@ admin.site.register(Service, ServiceAdmin)
 
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',
-                                     'company_business_name', 'company_logo', 'company_logo_thumbnail', 'company_vat_number', 'company_tax_code']}),
+        ('Company Info', 
+            {'readonly_fields' = ['image_display'],
+            'fields': ['company_custom_id', 'company_name', 'company_short_name',
+            'company_business_name', 'company_logo', 'company_vat_number', 'company_tax_code']}),
         ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
                                         'company_country']}),
         ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
@@ -74,7 +78,8 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
     list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
     search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
-
+    image_display = AdminThumbnail(image_field='company_logo_thumbnail')
+    image_display.short_description = 'Company logo'
 admin.site.register(Company, CompanyAdmin)
 
 
