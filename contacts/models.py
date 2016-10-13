@@ -3,6 +3,9 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 import datetime
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
+
 
 def create_uid():
     import uuid
