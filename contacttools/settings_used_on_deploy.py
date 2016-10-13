@@ -31,6 +31,7 @@ STATIC_ROOT = '/var/www/contact-tools/static_root'
 
 # directory where uploaded files are stored
 MEDIA_ROOT = os.path.join(STATIC_ROOT, "uploads")
+MEDIA_URL = '/static/uploads/'
 
 # Application definition
 
