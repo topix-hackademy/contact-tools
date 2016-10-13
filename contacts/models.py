@@ -71,7 +71,7 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
         
-    def image_field(self):
+    def get_logo_or_default(self):
         if self.company_logo:
             return self.company_logo_thumbnail
         else:
