@@ -23,3 +23,4 @@ six==1.10.0
 tornado==4.3
 django-material==0.8.0
 Pillow
+django-imagekit

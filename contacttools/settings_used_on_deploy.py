@@ -29,6 +29,10 @@ ALLOWED_HOSTS = ["WEBSITE-URLS"]
 
 STATIC_ROOT = '/var/www/contact-tools/static_root'
 
+# directory where uploaded files are stored
+MEDIA_ROOT = os.path.join(STATIC_ROOT, "uploads")
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'imagekit'
 ]
 
 MIDDLEWARE_CLASSES = [
