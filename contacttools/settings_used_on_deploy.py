@@ -32,8 +32,6 @@ STATIC_ROOT = '/var/www/contact-tools/static_root'
 # directory where uploaded files are stored
 MEDIA_ROOT = os.path.join(STATIC_ROOT, "uploads")
 
-IMAGEKIT_CACHEFILE_DIR = os.path.join(MEDIA_ROOT, "CACHE/images")
-
 # Application definition
 
 INSTALLED_APPS = [

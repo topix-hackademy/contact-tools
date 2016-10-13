@@ -75,10 +75,11 @@ class CompanyAdmin(admin.ModelAdmin):
         ('Company Type', {'fields': ['company_type']}),
         ('Notes', {'fields': ['company_notes']})
     ]
-    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
+    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code', 'thumb_logo_display')
     search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
     readonly_fields = ['thumb_logo_display']
-    thumb_logo_display = AdminThumbnail(image_field='company_logo')
+    thumb_logo_display = AdminThumbnail(image_field='company_logo_thumbnail')
+    
 admin.site.register(Company, CompanyAdmin)
 
 
