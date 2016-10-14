@@ -85,12 +85,12 @@ class Company(models.Model):
     def clean(self):
         # check VAT number is unique if defined
         if self.company_vat_number and self.company_vat_number != '':
-            if Company.objects.filter(company_vat_number=self.company_vat_number).count() > 0:
+            if Company.objects.filter(company_vat_number=self.company_vat_number).exclude(pk=self.id).count() > 0:
                 raise ValidationError('VAT number %s already in use!' % self.company_vat_number)
                 
         # check tax code is unique if defined
         if self.company_tax_code and self.company_tax_code != '':
-            if Company.objects.filter(company_tax_code=self.company_tax_code).count() > 0:
+            if Company.objects.filter(company_tax_code=self.company_tax_code).exclude(pk=self.id).count() > 0:
                 raise ValidationError('tax code %s already in use!' % self.company_tax_code)
         return
         
