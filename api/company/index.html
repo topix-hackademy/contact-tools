@@ -292,8 +292,14 @@
             </li>
           
             <li class="anchor">
-              <a title="GET ONE BY EMAIL" href="#get-one-by-email">
-                GET ONE BY EMAIL
+              <a title="GET ONE BY TAX or VAT code" href="#get-one-by-tax-or-vat-code">
+                GET ONE BY TAX or VAT code
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="GET with freesearch" href="#get-with-freesearch">
+                GET with freesearch
               </a>
             </li>
           
@@ -578,7 +584,7 @@
   }
 }
 </code></pre>
-<h2 id="get-one-by-email">GET ONE BY EMAIL</h2>
+<h2 id="get-one-by-tax-or-vat-code">GET ONE BY TAX or VAT code</h2>
 <pre><code>GET /api/v1/company-by-code/{code}/
 </code></pre>
 <p>Example of output:</p>
@@ -621,6 +627,47 @@
     ]
   }
 }
+</code></pre>
+<h2 id="get-with-freesearch">GET with freesearch</h2>
+<p>performs a case insensitive search of all comanies that include the specified string in:
+- company_name
+- company_short_name
+- company_business_name
+- company_website
+- company_notes</p>
+<pre><code>GET /api/v1/company-freesearch/{searchstring}
+</code></pre>
+<p>Example of output:</p>
+<pre><code>[
+  {
+    "id": 1,
+    "company_custom_id": 1,
+    "company_name": "Custom Company 1",
+    "company_short_name": "CustComp1",
+    "company_business_name": "Custom Company 1",
+    "company_vat_number": 12312312,
+    "company_tax_code": null,
+    "company_address": "address-info",
+    "company_cap": "123",
+    "company_city": "turin",
+    "company_province": "",
+    "company_country": "italy",
+    "company_phone_number": "2132133112",
+    "company_fax": "",
+    "company_website": "",
+    "company_notes": "",
+    "creation_date": "2016-07-13T09:15:36.633000Z",
+    "company_type": [
+      {
+        "id": 1,
+        "type_name": "PEERING",
+        "is_valid": true,
+        "creation_date": "2016-07-13T09:15:34.009000Z"
+      }
+    ]
+  },
+  ...
+]
 </code></pre>
           <aside class="copyright" role="note">
             
