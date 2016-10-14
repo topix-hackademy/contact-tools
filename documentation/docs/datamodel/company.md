@@ -42,7 +42,7 @@ Here the code used to Register the Admin Form for table **Company** in the Admin
         ('Company Type', {'fields': ['company_type']}),
         ('Notes', {'fields': ['company_notes']})
     ]
-    list_display = ('company_name', 'thumb_logo_display', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
+    list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
     search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
     readonly_fields = ['thumb_logo_display']
     thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
