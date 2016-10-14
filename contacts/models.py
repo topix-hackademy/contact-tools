@@ -7,6 +7,10 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
 
+import logging
+logger = logging.getLogger('ct-logger')
+
+
 def create_uid():
     import uuid
     return str(uuid.uuid4())
@@ -72,6 +76,7 @@ class Company(models.Model):
         return self.company_name
         
     def get_logo_or_default(self):
+        logger.info("logo is " + self.company_logo.__dict__)
         if self.company_logo:
             return self.company_logo_thumbnail
         else:
