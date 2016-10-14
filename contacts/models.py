@@ -7,6 +7,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
 import os
+from django.dispatch import receiver
 import logging
 logger = logging.getLogger('ct-logger')
 
