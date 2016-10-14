@@ -4,7 +4,7 @@ envContact
 .DS_Store
 site
 .idea
-settings.py
+local_settings.py
 static_root
 contacttools-custom.log
 

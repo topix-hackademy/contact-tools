@@ -16,26 +16,25 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0^c!v%y!b=fadbio_qbcgpx)3ku_sf4x7fxouod=&!n%6ujq70'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
-STATIC_ROOT = '/var/www/contact-tools/static_root'
 
-# directory where uploaded files are stored
-MEDIA_ROOT = os.path.join(STATIC_ROOT, "uploads")
-MEDIA_URL = '/static/uploads/'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.admin',
     'rest_framework',
     'contacts.apps.ContactsConfig',
     'django.contrib.admin',
@@ -89,7 +88,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -126,11 +124,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+
+# directory where uploaded files are stored
+MEDIA_ROOT = os.path.join(STATIC_ROOT, "uploads")
+MEDIA_URL = '/static/uploads/'
+
+
 
 ### LOGGING MANAGEMENT
 
@@ -154,7 +160,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/contacttools.log',
+            'filename': os.path.join(BASE_DIR, "contacttools-custom.log"),
             'formatter': 'ct-verbose'
         },
         'console': {
@@ -174,5 +180,7 @@ LOGGING = {
 
 
 
+# import local settings
+from local_settings import *
 
 
