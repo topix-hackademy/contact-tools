@@ -78,7 +78,7 @@ class CompanyAdmin(admin.ModelAdmin):
     list_display = ('company_name', 'thumb_logo_display', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
     search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
     readonly_fields = ['thumb_logo_display']
-    thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default')
+    thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
     thumb_logo_display.short_description = "Company logo"
     
 admin.site.register(Company, CompanyAdmin)
