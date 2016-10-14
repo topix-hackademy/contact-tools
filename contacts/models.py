@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.core.exceptions import ValidationError
+
 import datetime
 
 from imagekit.models import ImageSpecField
@@ -52,8 +54,8 @@ class Company(models.Model):
     company_name = models.CharField('Company Name', max_length=200, null=False, blank=False)
     company_short_name = models.CharField('Company Short Name', max_length=200, null=True, blank=True)
     company_business_name = models.CharField('Company Business Name', max_length=200, null=True, blank=True)
-    company_vat_number = models.CharField('VAT Number', null=True, blank=True, unique=True, max_length=30, help_text="international VAT number (eg. partita IVA)")
-    company_tax_code = models.CharField('Tax Code', null=True, blank=True, unique=True, max_length=30, help_text="(eg. codice fiscale)")
+    company_vat_number = models.CharField('VAT Number', null=True, blank=True, unique=False, max_length=30, help_text="international VAT number (eg. partita IVA)")
+    company_tax_code = models.CharField('Tax Code', null=True, blank=True, unique=False, max_length=30, help_text="(eg. codice fiscale)")
     company_address = models.CharField('Company Address', max_length=200, null=True, blank=True)
     company_cap = models.CharField('CAP', max_length=10, null=True, blank=True)
     company_city = models.CharField('City', max_length=200, null=True, blank=True)
@@ -77,6 +79,23 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
         
+        
+        
+    # validation
+    def clean(self):
+        # check VAT number is unique if defined
+        if self.company_vat_number and self.company_vat_number != '':
+            if Company.objects.filter(company_vat_number=self.company_vat_number).count() > 0:
+                raise ValidationError('VAT number %s already in use!' % self.company_vat_number)
+                
+        # check tax code is unique if defined
+        if self.company_tax_code and self.company_tax_code != '':
+            if Company.objects.filter(company_tax_code=self.company_tax_code).count() > 0:
+                raise ValidationError('tax code %s already in use!' % self.company_tax_code)
+        return
+        
+        
+    
     def get_logo_or_default(self):
         logger.info("logo is " + str(self.company_logo.__dict__))
         if self.company_logo:
