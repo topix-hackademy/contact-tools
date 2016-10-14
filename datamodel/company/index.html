@@ -333,9 +333,9 @@ For each Company we save this list of attributes:</p>
 <tbody>
 <tr>
 <td align="left">company_custom_id</td>
-<td>False</td>
+<td>True</td>
 <td>INT</td>
-<td>Unique Custom ID</td>
+<td>Custom ID on external systems (eg. ESolver)</td>
 </tr>
 <tr>
 <td align="left">company_name</td>
@@ -345,13 +345,13 @@ For each Company we save this list of attributes:</p>
 </tr>
 <tr>
 <td align="left">company_short_name</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>Short Name of the Company</td>
 </tr>
 <tr>
 <td align="left">company_business_name</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>Unique Name of the Company</td>
 </tr>
@@ -359,29 +359,29 @@ For each Company we save this list of attributes:</p>
 <td align="left">company_vat_number</td>
 <td>True</td>
 <td>INT</td>
-<td>VAT Number</td>
+<td>VAT Number (eg. partita IVA)</td>
 </tr>
 <tr>
 <td align="left">company_tax_code</td>
 <td>True</td>
 <td>INT</td>
-<td>TAX Code</td>
+<td>TAX Code (eg. codice fiscale)</td>
 </tr>
 <tr>
 <td align="left">company_address</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>Address of the Company</td>
 </tr>
 <tr>
 <td align="left">company_cap</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>CAP Address of the Company</td>
 </tr>
 <tr>
 <td align="left">company_city</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>City of the Company</td>
 </tr>
@@ -389,11 +389,11 @@ For each Company we save this list of attributes:</p>
 <td align="left">company_province</td>
 <td>True</td>
 <td>CHAR</td>
-<td>City Province of the Company</td>
+<td>Province of the Company</td>
 </tr>
 <tr>
 <td align="left">company_country</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>Country of the Company</td>
 </tr>
@@ -429,26 +429,42 @@ For each Company we save this list of attributes:</p>
 </tr>
 <tr>
 <td align="left">company_type</td>
-<td>True</td>
+<td>False</td>
 <td>CHAR</td>
 <td>Type (ManyToMany  with CompanyType)</td>
+</tr>
+<tr>
+<td align="left">company_logo</td>
+<td>False</td>
+<td>ImageField</td>
+<td>logo image of the company</td>
+</tr>
+<tr>
+<td align="left">company_logo_thumbnail</td>
+<td>False</td>
+<td>ImageSpecField</td>
+<td>dynamic property, does not go into the DB</td>
 </tr>
 </tbody>
 </table>
 <h2 id="code-snippet">Code Snippet</h2>
 <p>Here the code used to Register the Admin Form for table <strong>Company</strong> in the Admin Area:</p>
 <pre><code>class CompanyAdmin(admin.ModelAdmin):
-    fieldsets = [
-        ('Company Info', {'fields': ['company_custom_id', 'company_name', 'company_short_name',
-                                     'company_business_name', 'company_vat_number', 'company_tax_code']}),
-        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
-                                        'company_country']}),
-        ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
-        ('Company Type', {'fields': ['company_type']}),
-        ('Notes', {'fields': ['company_notes']})
-    ]
-    list_display = ('company_name', 'company_short_name', 'company_custom_id', 'company_vat_number', 'company_tax_code')
-    search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
+fieldsets = [
+    ('Company Info', 
+        {'fields': ['company_custom_id', 'company_name', 'company_short_name',
+        'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code']}),
+    ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
+                                    'company_country']}),
+    ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+    ('Company Type', {'fields': ['company_type']}),
+    ('Notes', {'fields': ['company_notes']})
+]
+list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
+search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
+readonly_fields = ['thumb_logo_display']
+thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
+thumb_logo_display.short_description = "Company logo"
 </code></pre>
 <h1 id="company-type">Company Type</h1>
 <p>This model is used to specify the type of each Company (Peering / Clients / ...).
