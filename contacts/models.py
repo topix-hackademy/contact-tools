@@ -105,7 +105,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     """Deletes file from filesystem
     when corresponding `MediaFile` object is deleted.
     """
-    if instance.company_logo:
+    if instance.company_logo and instance.company_logo.name != DEFAULT_LOGO_FILE:
         if os.path.isfile(instance.company_logo.path):
             os.remove(instance.company_logo.path)
 
