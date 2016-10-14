@@ -211,7 +211,7 @@ Example of output:
     }
 
 
-## GET ONE BY EMAIL
+## GET ONE BY TAX or VAT code
 
     GET /api/v1/company-by-code/{code}/
 
@@ -256,3 +256,51 @@ Example of output:
         ]
       }
     }
+
+
+## GET with freesearch
+
+performs a case insensitive search of all comanies that include the specified string in:
+- company_name
+- company_short_name
+- company_business_name
+- company_website
+- company_notes
+
+
+
+    GET /api/v1/company-freesearch/{searchstring}
+    
+Example of output:
+
+    [
+      {
+        "id": 1,
+        "company_custom_id": 1,
+        "company_name": "Custom Company 1",
+        "company_short_name": "CustComp1",
+        "company_business_name": "Custom Company 1",
+        "company_vat_number": 12312312,
+        "company_tax_code": null,
+        "company_address": "address-info",
+        "company_cap": "123",
+        "company_city": "turin",
+        "company_province": "",
+        "company_country": "italy",
+        "company_phone_number": "2132133112",
+        "company_fax": "",
+        "company_website": "",
+        "company_notes": "",
+        "creation_date": "2016-07-13T09:15:36.633000Z",
+        "company_type": [
+          {
+            "id": 1,
+            "type_name": "PEERING",
+            "is_valid": true,
+            "creation_date": "2016-07-13T09:15:34.009000Z"
+          }
+        ]
+      },
+      ...
+    ]
+    

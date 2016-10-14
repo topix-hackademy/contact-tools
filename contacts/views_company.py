@@ -61,16 +61,40 @@ def single_company(request, id, format=None):
 @auth_decorator
 def get_company_by_code(request, code, format=None):
     """
-    Retrieve a company by code
+    Retrieve a company by code (first match is returned)
+    """
+        
+    company = Company.objects.filter(Q(company_vat_number__iexact=code) | Q( company_tax_code__iexact=code))[0]
+    
+    if company:
+        if request.method == 'GET':
+            serializer = CompanySerializer(company)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+        
+
+@api_view(['GET'])
+@auth_decorator
+def get_company_freesearch(request, searchstring, format=None):
+    """
+    Retrieve a company by free search
     """
     try:
-        company = Company.objects.filter(Q(company_vat_number=code) | Q( company_tax_code=code)).get()
-        print company
-    except Company.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        companies = Company.objects.filter(
+            Q( company_name__icontains=searchstring ) | 
+            Q( company_short_name__icontains=searchstring ) |
+            Q( company_business_name__icontains=searchstring ) |
+            Q( company_website__icontains=searchstring ) |
+            Q( company_notes__icontains=searchstring )
+            ).all()
 
     if request.method == 'GET':
-        serializer = CompanySerializer(company)
+        serializer = CompanySerializer(companies, many=True,  remove_fields=['contacts'])
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
