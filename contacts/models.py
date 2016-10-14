@@ -97,11 +97,17 @@ class Company(models.Model):
         
     
     def get_logo_or_default(self):
-        logger.info("logo is " + str(self.company_logo.__dict__))
-        if self.company_logo:
-            return self.company_logo_thumbnail
-        else:
+        try:
+            if self.company_logo and self.company_logo.file:
+                return self.company_logo_thumbnail
+            else:
+                return None
+        except IOError:
             return None
+
+
+
+
 
     class Meta:
         ordering = ('company_name',)
