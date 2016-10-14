@@ -6,7 +6,7 @@ import datetime
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 
-
+import os
 import logging
 logger = logging.getLogger('ct-logger')
 
