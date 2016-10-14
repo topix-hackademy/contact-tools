@@ -67,13 +67,13 @@ admin.site.register(Service, ServiceAdmin)
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Company Info', 
-            {'fields': ['company_custom_id', 'company_name', 'company_short_name',
-            'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code']}),
+            {'fields': ['company_name', 'company_short_name',
+            'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code', 'company_custom_id']}),
+        ('Notes', {'fields': ['company_notes']}),
         ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
                                         'company_country']}),
-        ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+        ('Company Contacts', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
         ('Company Type', {'fields': ['company_type']}),
-        ('Notes', {'fields': ['company_notes']})
     ]
     list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
     search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
