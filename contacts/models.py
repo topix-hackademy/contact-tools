@@ -63,7 +63,7 @@ class Company(models.Model):
     company_notes = models.TextField('Notes', null=True, blank=True)
     company_is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
     
-    company_logo = models.ImageField(upload_to='logos/', default='None', help_text="Company logo")
+    company_logo = models.ImageField(upload_to='logos/', default='logos/nologo.png', help_text="Company logo")
     company_logo_thumbnail = ImageSpecField(source='company_logo',
                                       processors=[ResizeToFit(80, 80)],
                                       format='PNG')
