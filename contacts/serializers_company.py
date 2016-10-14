@@ -72,6 +72,7 @@ class CompanySerializer(serializers.ModelSerializer):
         instance.company_fax = validated_data.get('company_fax', instance.company_fax)
         instance.company_website = validated_data.get('company_website', instance.company_website)
         instance.company_notes = validated_data.get('company_notes', instance.company_notes)
+        instance.company_logo = instance.company_logo.get_absolute_url()
         instance.company_type.clear()
         for item in company_type_data:
             try:
@@ -84,7 +85,7 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('id', 'company_custom_id', 'company_name', 'company_short_name', 'company_business_name',
+        fields = ('id', 'company_custom_id', 'company_name', 'company_logo', 'company_short_name', 'company_business_name',
                   'company_vat_number', 'company_tax_code', 'company_address', 'company_cap', 'company_city',
                   'company_province', 'company_country', 'company_phone_number', 'company_fax', 'company_website',
                   'company_notes', 'creation_date', 'company_type', 'contacts')
