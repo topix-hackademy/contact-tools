@@ -69,7 +69,7 @@ class Company(models.Model):
     
     company_logo = models.ImageField(upload_to='logos/', default=DEFAULT_LOGO_FILE, help_text="Company logo")
     company_logo_thumbnail = ImageSpecField(source='company_logo',
-                                      processors=[ResizeToFit(80, 80)],
+                                      processors=[ResizeToFit(70, 70)],
                                       format='PNG')
 
     creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
