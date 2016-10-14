@@ -450,21 +450,21 @@ For each Company we save this list of attributes:</p>
 <h2 id="code-snippet">Code Snippet</h2>
 <p>Here the code used to Register the Admin Form for table <strong>Company</strong> in the Admin Area:</p>
 <pre><code>class CompanyAdmin(admin.ModelAdmin):
-fieldsets = [
-    ('Company Info', 
-        {'fields': ['company_custom_id', 'company_name', 'company_short_name',
-        'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code']}),
-    ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
-                                    'company_country']}),
-    ('Company Contacs', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
-    ('Company Type', {'fields': ['company_type']}),
-    ('Notes', {'fields': ['company_notes']})
-]
-list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
-search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
-readonly_fields = ['thumb_logo_display']
-thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
-thumb_logo_display.short_description = "Company logo"
+    fieldsets = [
+        ('Company Info', 
+            {'fields': ['company_name', 'company_short_name',
+            'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code', 'company_custom_id']}),
+        ('Notes', {'fields': ['company_notes']}),
+        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
+                                        'company_country']}),
+        ('Company Contacts', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+        ('Company Type', {'fields': ['company_type']}),
+    ]
+    list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
+    search_fields = ['company_name', 'company_short_name', 'company_vat_number', 'company_tax_code']
+    readonly_fields = ['thumb_logo_display']
+    thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
+    thumb_logo_display.short_description = "Company logo"
 </code></pre>
 <h1 id="company-type">Company Type</h1>
 <p>This model is used to specify the type of each Company (Peering / Clients / ...).
