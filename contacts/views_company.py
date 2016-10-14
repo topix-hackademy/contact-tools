@@ -82,8 +82,7 @@ def get_company_freesearch(request, searchstring, format=None):
     """
     Retrieve a company by free search
     """
-    try:
-        companies = Company.objects.filter( company_name__icontains=searchstring ).filter( company_short_name__icontains=searchstring ).filter( company_business_name__icontains=searchstring ).filter( company_website__icontains=searchstring ).filter( company_notes__icontains=searchstring ).all()
+    companies = Company.objects.filter( company_name__icontains=searchstring ).filter( company_short_name__icontains=searchstring ).filter( company_business_name__icontains=searchstring ).filter( company_website__icontains=searchstring ).filter( company_notes__icontains=searchstring ).all()
 
     if request.method == 'GET':
         serializer = CompanySerializer(companies, many=True,  remove_fields=['contacts'])
