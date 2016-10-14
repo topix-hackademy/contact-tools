@@ -45,6 +45,7 @@ class ContactType(models.Model):
 
 @python_2_unicode_compatible
 class Company(models.Model):
+    DEFAULT_LOGO_FILE = 'logos/nologo.png'
 
     company_custom_id = models.IntegerField('Custom External ID', null=True, blank=True, help_text="ID of this Company in external systems (eg. ESolver)")
     company_name = models.CharField('Company Name', max_length=200, null=False, blank=False)
@@ -63,7 +64,7 @@ class Company(models.Model):
     company_notes = models.TextField('Notes', null=True, blank=True)
     company_is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
     
-    company_logo = models.ImageField(upload_to='logos/', default='logos/nologo.png', help_text="Company logo")
+    company_logo = models.ImageField(upload_to='logos/', default=DEFAULT_LOGO_FILE, help_text="Company logo")
     company_logo_thumbnail = ImageSpecField(source='company_logo',
                                       processors=[ResizeToFit(80, 80)],
                                       format='PNG')
@@ -95,6 +96,45 @@ class Company(models.Model):
                                           "contact_username": rel.contact.contact_username,
                                           "contact_email": rel.contact.contact_email}})
         return {"relations": relations}
+
+
+# delete files from filesystem when model is deleted from DB
+@receiver(models.signals.post_delete, sender=Company)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
+    if instance.company_logo:
+        if os.path.isfile(instance.company_logo.path):
+            os.remove(instance.company_logo.path)
+
+# delete files from filesystem when model is modified to change the file
+@receiver(models.signals.pre_save, sender=Company)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """Deletes file from filesystem
+    when corresponding `MediaFile` object is changed.
+    """
+    
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Company.objects.get(pk=instance.pk).company_logo
+    except Company.DoesNotExist:
+        return False
+
+    new_file = instance.company_logo
+    if not old_file == new_file and old_file.name != DEFAULT_LOGO_FILE:
+        if os.path.isfile(old_file.path):
+            logger.info("removing old file " + old_file.path)
+            os.remove(old_file.path)
+
+
+
+
+
+
+
 
 
 @python_2_unicode_compatible
