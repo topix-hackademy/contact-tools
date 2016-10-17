@@ -12,7 +12,7 @@ urlpatterns = [
 
     url(r'^contact/$', view_contact.all_contacts),
     url(r'^contact/(?P<id>[0-9]+)/$', view_contact.single_contact),
-    url(r'^contact-by-csid/(?P<csid>[0-9]+)/$', views_contact.get_contact_by_csid),
+    url(r'^contact-by-csid/(?P<csid>[0-9]+)/$', view_contact.get_contact_by_csid),
 
     url(r'^company/$', views_company.all_companies),
     url(r'^company/(?P<id>[0-9]+)/$', views_company.single_company),
