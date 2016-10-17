@@ -68,6 +68,7 @@ class CompanySerializer(serializers.ModelSerializer):
         instance.company_city = validated_data.get('company_city', instance.company_city)
         instance.company_province = validated_data.get('company_province', instance.company_province)
         instance.company_country = validated_data.get('company_country', instance.company_country)
+        instance.company_mailingaddress = validated_data.get('company_mailingaddress', instance.company_mailingaddress)
         instance.company_phone_number = validated_data.get('company_phone_number', instance.company_phone_number)
         instance.company_fax = validated_data.get('company_fax', instance.company_fax)
         instance.company_website = validated_data.get('company_website', instance.company_website)
@@ -87,5 +88,5 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ('id', 'company_custom_id', 'company_name', 'company_logo', 'company_short_name', 'company_business_name',
                   'company_vat_number', 'company_tax_code', 'company_address', 'company_cap', 'company_city',
-                  'company_province', 'company_country', 'company_phone_number', 'company_fax', 'company_website',
+                  'company_province', 'company_country', 'company_mailingaddress', 'company_phone_number', 'company_fax', 'company_website',
                   'company_notes', 'creation_date', 'company_type', 'contacts')

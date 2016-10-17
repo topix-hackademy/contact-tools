@@ -61,6 +61,7 @@ class Company(models.Model):
     company_city = models.CharField('City', max_length=200, null=True, blank=True)
     company_province = models.CharField('Province', max_length=200, null=True, blank=True)
     company_country = models.CharField('Country', max_length=200, null=True, blank=True)
+    company_mailingaddress = models.TextField('Mailing Address', null=True, blank=True)
     company_phone_number = models.CharField('Phone Number', max_length=100, null=True, blank=True)
     company_fax = models.CharField('FAX', max_length=200, null=True, blank=True)
     company_website = models.CharField('WebSite', max_length=200, null=True, blank=True)

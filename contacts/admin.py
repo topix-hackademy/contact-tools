@@ -69,10 +69,16 @@ class CompanyAdmin(admin.ModelAdmin):
         ('Company Info', 
             {'fields': ['company_name', 'company_short_name',
             'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code', 'company_custom_id']}),
+        
         ('Notes', {'fields': ['company_notes']}),
-        ('Company Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
+        
+        ('Main Address', {'fields': ['company_address', 'company_cap', 'company_city', 'company_province',
                                         'company_country']}),
-        ('Company Contacts', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+        
+        ('Mailing Address', {'fields': ['company_mailingaddress']}),
+        
+        ('Contact Info', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
+        
         ('Company Type', {'fields': ['company_type']}),
     ]
     list_display = ('company_name', 'thumb_logo_display', 'company_city', 'company_website')
