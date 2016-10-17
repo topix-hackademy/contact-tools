@@ -7,6 +7,7 @@ For each Company we save this list of attributes:
 
 |FIELD NAME | NULLABLE | TYPE | DESCRIPTION|
 |:----------- | :-----------: | :-----------: | :-----------|
+|company_centralservices_id  | True      |  INT           | Company ID on old Centralservices system (used for sync)|
 |company_custom_id       | True      |  INT           | Custom ID on external systems (eg. ESolver)|
 |company_name            | False      |  CHAR          | Name of the Company|
 |company_short_name      | True      |  CHAR          | Short Name of the Company|
@@ -18,6 +19,7 @@ For each Company we save this list of attributes:
 |company_city            | True      |  CHAR          | City of the Company|
 |company_province        | True       |  CHAR          | Province of the Company|
 |company_country         | True      |  CHAR          | Country of the Company|
+|company_mailingaddress    | True       |  CHAR          | Mailing Address of the Company|
 |company_phone_number    | True       |  CHAR          | Phone Number of the Company|
 |company_fax             | True       |  CHAR          | Fax of the Company|
 |company_website         | True       |  CHAR          | WebSite of the Company|

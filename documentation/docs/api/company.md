@@ -304,3 +304,11 @@ Example of output:
       ...
     ]
     
+	
+	
+## GET BY Centralservices ID
+
+Returns an array of companies, only zero or one should be returned in normal conditions
+
+    GET /api/v1/company-by-csid/{old_centralservices_id}/
+

@@ -78,6 +78,21 @@ def get_company_by_code(request, code, format=None):
 
 @api_view(['GET'])
 @auth_decorator
+def get_company_by_csid(request, csid, format=None):
+    """
+    Retrieve a company by Centralservices ID
+    """
+    companies = Company.objects.filter( company_centralservices_id=csid ).all()
+
+    if request.method == 'GET':
+        serializer = CompanySerializer(companies, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@auth_decorator
 def get_company_freesearch(request, searchstring, format=None):
     """
     Retrieve a company by free search

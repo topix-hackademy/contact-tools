@@ -212,3 +212,11 @@ Example of output:
       }
     ]
     
+	
+	
+	
+## GET BY Centralservices ID
+
+returns an array of contacts (max one in normal conditions)
+
+    GET /api/v1/contact-by-csid/{old_cs_id}/

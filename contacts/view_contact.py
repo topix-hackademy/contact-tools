@@ -66,3 +66,20 @@ def get_contact_by_email(request, email, format=None):
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        
+@api_view(['GET'])
+@auth_decorator
+def get_contact_by_csid(request, csid, format=None):
+    """
+    Retrieve a contact by Centralservices ID
+    """
+    contacts = Contact.objects.filter( contact_centralservices_id=csid ).all()
+
+    if request.method == 'GET':
+        serializer = ContactSerializer(contacts, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+

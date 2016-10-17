@@ -2,14 +2,17 @@
 
 In this model we are going to save all the list of contacs. 
 
+Email address is used as the main way to find a user.
+
 For each Contact we save this list of attributes:
 
 |FIELD NAME | NULLABLE | TYPE | DESCRIPTION|
 |:----------- | :-----------: | :-----------: | :-----------|
-|contact_username       | False     |  CHAR   | Username of the Contacts|
+|contact_centralservices_id  | True      |  INT           | Contact ID on old Centralservices system (used for sync)|
+|contact_username       | True     |  CHAR   | Username of the Contacts|
 |contact_first_name     | True      |  CHAR   | First Name of the Contacts|
 |contact_last_name      | True      |  CHAR   | Last Name of the Contacts|
-|contact_email          | True     |  EMAIL  | Email of the Contacts|
+|contact_email          | False     |  EMAIL  | Email of the Contacts|
 |contact_email_secondary | True     |  EMAIL  | Secondary Email of the Contacts|
 |contact_phone          | True      |  CHAR   | Phone Number of the Contacts|
 |contact_phone_secondary | True      |  CHAR   | Secondary Phone Number of the Contacts|
@@ -26,7 +29,7 @@ Here the code used to Register the Admin Form for table **Contact** in the Admin
             ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
             ('Notes', {'fields': ['contact_notes']})
         ]
-        list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')
+        list_display = ('contact_first_name', 'contact_last_name', 'contact_email', 'contact_username')
         search_fields = ['contact_username', 'contact_email', 'contact_last_name']
 
 

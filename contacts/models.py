@@ -49,7 +49,10 @@ class ContactType(models.Model):
 @python_2_unicode_compatible
 class Company(models.Model):
     DEFAULT_LOGO_FILE = 'logos/nologo.png'
-
+    
+    # this is needed to sync with the old CS
+    company_centralservices_id = models.IntegerField('Old Centralservices ID', null=True, blank=True, help_text="ID of this Company in the old CS")
+    
     company_custom_id = models.IntegerField('Custom External ID', null=True, blank=True, help_text="ID of this Company in external systems (eg. ESolver)")
     company_name = models.CharField('Company Name', max_length=200, null=False, blank=False)
     company_short_name = models.CharField('Company Short Name', max_length=200, null=True, blank=True)
@@ -167,10 +170,13 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 @python_2_unicode_compatible
 class Contact(models.Model):
 
-    contact_username = models.CharField('Contact User Name', max_length=200, null=False, blank=False, unique=True)
+    # this is needed to sync with the old CS
+    contact_centralservices_id = models.IntegerField('Old Centralservices ID', null=True, blank=True, help_text="ID of this contact in the old CS")
+
+    contact_username = models.CharField('Contact User Name', max_length=200, null=True, blank=True)
     contact_first_name = models.CharField('Contact First Name', max_length=200, null=True, blank=True)
     contact_last_name = models.CharField('Contact Last Name', max_length=200, null=True, blank=True)
-    contact_email = models.EmailField('Contact Email', max_length=200, null=True, blank=True)
+    contact_email = models.EmailField('Contact Email', max_length=200, null=False, blank=False, unique=True)
     contact_email_secondary = models.EmailField('Contact Email Secondary', max_length=200, null=True, blank=True)
     contact_phone = models.CharField('Contact Phone', max_length=100, null=True, blank=True)
     contact_phone_secondary = models.CharField('Contact Phone Secondary', max_length=100, null=True, blank=True)
@@ -195,6 +201,16 @@ class Contact(models.Model):
             relations.append({"role": rel.contact_type.type_name,
                               "company": {"id": rel.company.id, "company_name": rel.company.company_name}})
         return {"relations": relations}
+
+
+    # validation
+    def clean(self):
+        # check username is unique if defined
+        if self.contact_username and self.contact_username != '':
+            if Contact.objects.filter(contact_username=self.contact_username).exclude(pk=self.id).count() > 0:
+                raise ValidationError('user name %s already in use!' % self.contact_username)
+                
+        return
 
 
 @python_2_unicode_compatible
