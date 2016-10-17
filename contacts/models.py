@@ -176,7 +176,7 @@ class Contact(models.Model):
     contact_username = models.CharField('Contact User Name', max_length=200, null=True, blank=True)
     contact_first_name = models.CharField('Contact First Name', max_length=200, null=True, blank=True)
     contact_last_name = models.CharField('Contact Last Name', max_length=200, null=True, blank=True)
-    contact_email = models.EmailField('Contact Email', max_length=200, null=False, blank=False, unique=True)
+    contact_email = models.EmailField('Contact Email', max_length=200, null=False, blank=False, unique=True, default="")
     contact_email_secondary = models.EmailField('Contact Email Secondary', max_length=200, null=True, blank=True)
     contact_phone = models.CharField('Contact Phone', max_length=100, null=True, blank=True)
     contact_phone_secondary = models.CharField('Contact Phone Secondary', max_length=100, null=True, blank=True)
