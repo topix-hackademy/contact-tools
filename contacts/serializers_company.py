@@ -73,7 +73,7 @@ class CompanySerializer(serializers.ModelSerializer):
         instance.company_fax = validated_data.get('company_fax', instance.company_fax)
         instance.company_website = validated_data.get('company_website', instance.company_website)
         instance.company_notes = validated_data.get('company_notes', instance.company_notes)
-        instance.company_logo = validated_data.get('company_logo', instance.company_logo.get_absolute_url())
+        # instance.company_logo = validated_data.get('company_logo', instance.company_logo.get_absolute_url())
         instance.company_type.clear()
         for item in company_type_data:
             try:
