@@ -84,7 +84,7 @@ class Company(models.Model):
         return self.company_name
     
     def display_types(self):
-            return join([t.type_name for t in self.company_type.all()])
+            return ", ".join([t.type_name for t in self.company_type.all()])
         
         
     # validation
