@@ -82,7 +82,9 @@ class Company(models.Model):
 
     def __str__(self):
         return self.company_name
-        
+    
+    def display_types(self):
+            return join([t.type_name for t in self.company_type.all()])
         
         
     # validation
