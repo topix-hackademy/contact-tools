@@ -100,7 +100,10 @@ class ContactAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
         ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
-        ('Notes', {'fields': ['contact_notes']})
+        ('Notes', {'fields': ['contact_notes']}),
+        ('External references', 
+            {'fields': ['contact_centralservices_id']}),
+        
     ]
     list_display = ('contact_first_name', 'contact_last_name', 'contact_email', 'contact_username')
     search_fields = ['contact_username', 'contact_email', 'contact_last_name']
