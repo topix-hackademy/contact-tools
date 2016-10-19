@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 
+import logging
+logger = logging.getLogger('ct-logger')
+
+
 @api_view(['GET','POST'])
 @auth_decorator
 def all_contacts(request,format=None, *args, **kwargs):

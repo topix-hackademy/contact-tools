@@ -21,14 +21,12 @@ def all_companies(request,format=None, *args, **kwargs):
     """
     List all snippets, or create a new snippet.
     """
-    logger.debug("entering all_companies")
     if request.method == 'GET':
         companies = Company.objects.all()
         serializer = CompanySerializer(companies, many=True,  remove_fields=['contacts'])
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        logger.debug("creating company: %s", request.data)
         serializer = CompanySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
