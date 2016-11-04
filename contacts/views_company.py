@@ -67,7 +67,7 @@ def get_company_by_code(request, code, format=None):
     Retrieve a company by code (first match is returned)
     """
         
-    company = Company.objects.filter(Q(company_vat_number__iexact=code) | Q( company_tax_code__iexact=code))[0]
+    company = Company.objects.filter(Q(company_vat_number__iexact=code) | Q( company_tax_code__iexact=code)).first()
     
     if company:
         if request.method == 'GET':
