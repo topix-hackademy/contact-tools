@@ -24,7 +24,7 @@ class CompanyType(models.Model):
 
     type_name = models.CharField('Company Type', max_length=200)
     is_valid = models.BooleanField('Is Valid', default=True)
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
     def __str__(self):
         return self.type_name
@@ -37,7 +37,7 @@ class CompanyType(models.Model):
 class ContactType(models.Model):
     type_name = models.CharField('Contact Type', max_length=200, unique=True)
     is_valid = models.BooleanField('Is Valid', default=True)
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
     def __str__(self):
         return self.type_name
@@ -76,7 +76,7 @@ class Company(models.Model):
                                       processors=[ResizeToFit(70, 70)],
                                       format='PNG')
 
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
     # Company Type relation
     company_type = models.ManyToManyField(CompanyType)
 
@@ -184,7 +184,7 @@ class Contact(models.Model):
     contact_phone_secondary = models.CharField('Contact Phone Secondary', max_length=100, null=True, blank=True)
     contact_notes = models.TextField('Notes', null=True, blank=True)
 
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
     # relationship with company
     contact_company = models.ManyToManyField(Company, through='CCRelation')
@@ -222,7 +222,7 @@ class CCRelation(models.Model):
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
     contact_type = models.ForeignKey(ContactType, on_delete=models.CASCADE)
 
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
     def __str__(self):
         return self.company.company_short_name + " - " + self.contact.contact_username \
@@ -238,8 +238,8 @@ class Service(models.Model):
     service_name = models.CharField('Service Name', max_length=200, null=False, blank=False)
     token = models.CharField('Token', default=create_uid, max_length=200, null=False, blank=False, unique=True)
     is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
-    creation_date = models.DateTimeField('Creation Date', default=datetime.datetime.now)
-    activation_date = models.DateTimeField('Activation Date', default=datetime.datetime.now)
+    creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
+    activation_date = models.DateTimeField('Activation Date', auto_now_add=True)
     delete_date = models.DateTimeField('Delete Date', null=True, blank=True)
     notes = models.TextField('Notes', null=True, blank=True)
 

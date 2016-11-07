@@ -44,7 +44,7 @@ class ContactSerializer(serializers.ModelSerializer):
             except Exception as e:
                 print e
                 contact.delete()
-                raise serializers.ValidationError({'company_type': ["Invalid role"]})
+                raise serializers.ValidationError({'contact_type': ["Invalid role"]})
 
             contact.save()
             relationship.save()
