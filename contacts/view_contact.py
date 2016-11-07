@@ -22,6 +22,8 @@ def all_contacts(request,format=None, *args, **kwargs):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        logger.debug("going to create contact")
+        logger.debug(request.data)
         serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
