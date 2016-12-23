@@ -76,7 +76,16 @@ def get_company_by_code(request, code, format=None):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
     else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        print("company not found")
+        company = Company.objects.filter(
+            Q(company_vat_number__iendswith=code) | Q(company_tax_code__iendswith=code)).first()
+        if company:
+            if request.method == 'GET':
+                serializer = CompanySerializer(company)
+                return Response(serializer.data)
+            else:
+                print("company not found 2")
+                return Response(status=status.HTTP_404_NOT_FOUND)
         
 
 @api_view(['GET'])
