@@ -83,9 +83,9 @@ def get_company_by_code(request, code, format=None):
             if request.method == 'GET':
                 serializer = CompanySerializer(company)
                 return Response(serializer.data)
-            else:
-                print("company not found 2")
-                return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            print("company not found 2")
+            return Response(status=status.HTTP_404_NOT_FOUND)
         
 
 @api_view(['GET'])
