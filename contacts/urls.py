@@ -21,7 +21,7 @@ urlpatterns = [
 
     url(r'^company-by-code/(?P<code>\w{0,50})/$', views_company.get_company_by_code),
     url(r'^company-by-csid/(?P<csid>[0-9]+)/$', views_company.get_company_by_csid),
-    url(r'^company-freesearch/(?P<searchstring>\w{0,50})/$', views_company.get_company_freesearch),
+    url(r'^company-freesearch/(?P<searchstring>[\w\s]+)/$', views_company.get_company_freesearch),
 
     url(r'^$', views_company.index, name='index'),
 ]
