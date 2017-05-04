@@ -34,7 +34,7 @@ def check_deploy():
     local('python manage.py check --deploy')
 
 def create_setting():
-    local('cp contacttools/local_settings.py contacttools/settings.py')
+    local('cp contacttools/local_settings.py-example contacttools/local_settings.py')
 
 def req_pop():
     local('pip freeze > requirements.txt')
