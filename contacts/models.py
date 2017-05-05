@@ -128,7 +128,7 @@ class Company(models.Model):
                                           "contact_username": rel.contact.contact_username,
                                           "contact_first_name": rel.contact.contact_first_name,
                                           "contact_last_name": rel.contact.contact_last_name,
-                                          "contact_email": rel.contact.contact_email
+                                          "contact_email": rel.contact.contact_email,
                                           "contact_email_secondary": rel.contact.contact_email_secondary,
                                           "contact_phone": rel.contact.contact_phone,
                                           "contact_phone_secondary": rel.contact.contact_phone_secondary,
