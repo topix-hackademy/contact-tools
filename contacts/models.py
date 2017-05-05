@@ -126,7 +126,14 @@ class Company(models.Model):
             relations.append({"role": rel.contact_type.type_name,
                               "contact": {"id": rel.contact.id,
                                           "contact_username": rel.contact.contact_username,
-                                          "contact_email": rel.contact.contact_email}})
+                                          "contact_first_name": rel.contact.contact_first_name,
+                                          "contact_last_name": rel.contact.contact_last_name,
+                                          "contact_email": rel.contact.contact_email
+                                          "contact_email_secondary": rel.contact.contact_email_secondary,
+                                          "contact_phone": rel.contact.contact_phone,
+                                          "contact_phone_secondary": rel.contact.contact_phone_secondary,
+                                          "contact_notes": rel.contact.contact_notes
+                                      }})
         return {"relations": relations}
 
 
