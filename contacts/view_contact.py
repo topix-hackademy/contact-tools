@@ -37,6 +37,7 @@ def single_contact(request, id, format=None):
     """
     Retrieve, update or delete a snippet instance.
     """
+    logger.debug("entering single_contact, method " + request.method)
     try:
         contact = Contact.objects.get(id=id)
     except Contact.DoesNotExist:
@@ -48,9 +49,13 @@ def single_contact(request, id, format=None):
 
     elif request.method == 'PUT':
         serializer = ContactSerializer(contact, data=request.data)
+	logger.debug("going to update contact")
         if serializer.is_valid():
+	    logger.debug("data is valid")
             serializer.save()
+	    logger.debug("data saved")
             return Response(serializer.data)
+	logger.debug("data is not valid")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':

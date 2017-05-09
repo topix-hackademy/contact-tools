@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Contact, ContactType, Company, CCRelation
 from .helper import return_oldvalue_if_empty
+import logging
+logger = logging.getLogger('ct-logger')
 
 
 class ContactTypeSerializer(serializers.ModelSerializer):
@@ -51,7 +53,7 @@ class ContactSerializer(serializers.ModelSerializer):
             return contact
 
     def update(self,  instance, validated_data):
-
+	logger.debug("ContactSerializer: entering update")
         contact_role_data = validated_data.pop('role')
 
         instance.contact_username = return_oldvalue_if_empty(validated_data.get('contact_username', ""),
