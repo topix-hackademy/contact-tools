@@ -319,6 +319,7 @@
           
           <h1 id="contact">Contact</h1>
 <p>In this model we are going to save all the list of contacs. </p>
+<p>Email address is used as the main way to find a user.</p>
 <p>For each Contact we save this list of attributes:</p>
 <table>
 <thead>
@@ -331,8 +332,14 @@
 </thead>
 <tbody>
 <tr>
+<td align="left">contact_centralservices_id</td>
+<td>True</td>
+<td>INT</td>
+<td>Contact ID on old Centralservices system (used for sync)</td>
+</tr>
+<tr>
 <td align="left">contact_username</td>
-<td>False</td>
+<td>True</td>
 <td>CHAR</td>
 <td>Username of the Contacts</td>
 </tr>
@@ -350,7 +357,7 @@
 </tr>
 <tr>
 <td align="left">contact_email</td>
-<td>True</td>
+<td>False</td>
 <td>EMAIL</td>
 <td>Email of the Contacts</td>
 </tr>
@@ -394,7 +401,7 @@
         ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
         ('Notes', {'fields': ['contact_notes']})
     ]
-    list_display = ('contact_username', 'contact_email', 'contact_first_name', 'contact_last_name')
+    list_display = ('contact_first_name', 'contact_last_name', 'contact_email', 'contact_username')
     search_fields = ['contact_username', 'contact_email', 'contact_last_name']
 </code></pre>
 <h1 id="contact-type">Contact Type</h1>

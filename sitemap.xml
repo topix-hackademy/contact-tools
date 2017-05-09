@@ -4,7 +4,7 @@
     
     <url>
      <loc>http://top-ix.org/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,31 +13,31 @@
         
     <url>
      <loc>http://top-ix.org/datamodel/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/company/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/contact/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/relation/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/datamodel/service/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -47,31 +47,31 @@
         
     <url>
      <loc>http://top-ix.org/api/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/api/company/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/api/company_type/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/api/contact/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://top-ix.org/api/contact_type/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -80,7 +80,7 @@
     
     <url>
      <loc>http://top-ix.org/deploy/</loc>
-     <lastmod>2016-10-17</lastmod>
+     <lastmod>2017-05-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
