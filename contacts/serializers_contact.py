@@ -92,16 +92,16 @@ class ContactSerializer(serializers.ModelSerializer):
                 else:
                     # relation is present in the local lists but not in the remote list
                     # remove the relation
-                    logger.info("removing relation " + localRel.company.company_name +" (" +localRel.contact_type.type_name+ ")")
-                    # localRel.delete()
+                    #logger.info("removing relation " + localRel.company.company_name +" (" +localRel.contact_type.type_name+ ")")
+                    localRel.delete()
     
             elif remoteRel:
                 # relation is present only in the remote list
-                logger.info("adding relation " + remoteRel["company"]["company_name"] +" (" +remoteRel["role"]+ ")")
+                #logger.info("adding relation " + remoteRel["company"]["company_name"] +" (" +remoteRel["role"]+ ")")
                 try:
                     contact_type = ContactType.objects.get(type_name=remoteRel['role'])
                     company = Company.objects.get(id=remoteRel['company']['id'])
-                    # CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
+                    CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
                 except Exception as e:
                     print e
                     raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
@@ -138,17 +138,20 @@ def auditRelations(localObjects, remoteObjects):
     result = []
 
     foundRemoteObjRef = []
+    
+    remoteObjects_nodupe=[]
+    # remove duplicates
+    for remobj in remoteObjects:
+        if not remobj in remoteObjects_nodupe:
+            remoteObjects_nodupe.append(remobj)
 
     # iterate through the relations in the local DB
     for locobj in localObjects:
         # use the pair company id and role name to find matches
         localRefFieldValue="%d-%s" % (locobj.company.id, locobj.contact_type.type_name)
 
-        logger.info("localRefFieldValue: " + localRefFieldValue)
-
-        for remobj in remoteObjects:
+        for remobj in remoteObjects_nodupe:
             crossref="%d-%s" % (remobj["company"]["id"], remobj["role"])
-            logger.info("crossref: " + crossref)
 
             if crossref == localRefFieldValue:
                 remObjFound=remobj
