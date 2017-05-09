@@ -64,6 +64,14 @@ admin.site.register(Service, ServiceAdmin)
 
 ### COMPANY ADMIN
 
+class RelationInline(admin.TabularInline):
+    model = CCRelation
+    # fk_name = 'device'
+    exclude = [ ]
+    readonly_fields = ['company', 'contact', 'contact_type']
+    extra=0
+
+
 class CompanyAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Company Info', 
@@ -90,6 +98,7 @@ class CompanyAdmin(admin.ModelAdmin):
     readonly_fields = ['thumb_logo_display']
     thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
     thumb_logo_display.short_description = "Company logo"
+    inlines = [ RelationInline ]
     
 admin.site.register(Company, CompanyAdmin)
 
@@ -106,8 +115,9 @@ class ContactAdmin(admin.ModelAdmin):
         
     ]
     list_display = ('contact_first_name', 'contact_last_name', 'contact_email', 'contact_username')
-    search_fields = ['contact_username', 'contact_email', 'contact_last_name']
-
+    search_fields = ['contact_username', 'contact_email', 'contact_last_name', 'contact_first_name']
+    inlines = [ RelationInline ]
+    
 
 admin.site.register(Contact, ContactAdmin)
 
@@ -119,6 +129,6 @@ class CCRelationAdmin(admin.ModelAdmin):
     ]
     list_display = ('company', 'contact', 'contact_type')
     list_filter = ['contact_type']
-    search_fields = ['company', 'contact']
+    search_fields = ['company__company_name', 'contact__contact_first_name', 'contact__contact_last_name', 'contact__contact_email', 'contact__contact_username']
 
 admin.site.register(CCRelation, CCRelationAdmin)
