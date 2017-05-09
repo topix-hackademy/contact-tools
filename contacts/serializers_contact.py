@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Contact, ContactType, Company, CCRelation
 from .helper import return_oldvalue_if_empty
+
 import logging
 logger = logging.getLogger('ct-logger')
 
@@ -53,7 +54,6 @@ class ContactSerializer(serializers.ModelSerializer):
             return contact
 
     def update(self,  instance, validated_data):
-	logger.debug("ContactSerializer: entering update")
         contact_role_data = validated_data.pop('role')
 
         instance.contact_username = return_oldvalue_if_empty(validated_data.get('contact_username', ""),
@@ -73,10 +73,46 @@ class ContactSerializer(serializers.ModelSerializer):
         instance.contact_notes = return_oldvalue_if_empty(validated_data.get('contact_notes', ""),
                                                           instance.contact_notes)
 
+
+        # compare existing relationships for this contact with the relationships provided
+        relations_db=CCRelation.objects.filter(contact=instance)
+        
+        auditresult=auditRelations(contact_role_data['relations'], relations_db)
+        
+        for res in auditresult:
+            localRel=res['loc']
+            remoteRel=res['rem']
+            
+            if localRel:
+                
+                if remoteRel:
+                    # relation is present both in the local and remote lists
+                    # nothing to do
+                    pass
+                else:
+                    # relation is present in the local lists but not in the remote list
+                    # remove the relation
+                    logger.info("removing relation " + localRel.company.company_name +" (" +localRel.role.name+ ")")
+                    # localRel.delete()
+    
+            elif remoteRel:
+                # relation is present only in the remote list
+                logger.info("adding relation " + remoteRel.company.company_name +" (" +remoteRel.role+ ")")
+                try:
+                    contact_type = ContactType.objects.get(type_name=remoteRel['role'])
+                    company = Company.objects.get(id=remoteRel['company']['id'])
+                    # CCRelation.objects.create(company=company, contact_type=contact_type, contact=instance)
+                except Exception as e:
+                    print e
+                    raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
+        
+        
+        
+        '''
         for item in contact_role_data['relations']:
             try:
-                relationship = CCRelation.objects.filter(company__id=item['company']['id'], contact=instance)
                 contact_type = ContactType.objects.get(type_name=item['role'])
+                relationship = CCRelation.objects.filter(company__id=item['company']['id'], contact=instance)
                 company = Company.objects.get(id=item['company']['id'])
                 if relationship:
                     relationship.delete()
@@ -85,6 +121,9 @@ class ContactSerializer(serializers.ModelSerializer):
             except Exception as e:
                 print e
                 raise serializers.ValidationError({'Validation Error': ["Invalid company and/or invalid contact_type"]})
+        '''
+        
+        
         instance.save()
         return instance
 
@@ -92,3 +131,53 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = ('id', 'contact_username', 'contact_first_name', 'contact_last_name', 'contact_email', 'contact_email_secondary',
                   'contact_phone', 'contact_phone_secondary', 'contact_notes', 'role', 'contact_centralservices_id')
+
+
+
+def auditRelations(localObjects, remoteObjects):
+    result = []
+    
+    foundRemoteObjRef = []
+    
+    # iterate through the relations in the local DB
+    for locobj in localObjects:
+        # use the pair company id and role name to find matches
+        localRefFieldValue="%d-%s" % (locobj.company.id, locobj.role.name)
+        
+        logger.info("localRefFieldValue: " + localRefFieldValue)
+        
+        for remobj in remoteObjects:
+            crossref="%d-%s" % (remobj["company"]["id"], remobj["role"])
+            logger.info("crossref: " + crossref)
+            
+            if crossref == localRefFieldValue:
+                remObjFound=remobj
+                foundRemoteObjRef.append(crossref)
+                
+                break
+                
+        if remObjFound == None:
+            # relation is in the local DB and not in the remote list
+            res={'loc': locobj, 'rem': None}
+        else:
+            # relation is in both remote and local lists
+            res={'loc': locobj, 'rem': remObjFound}
+            
+
+        result.append(res)
+    
+    
+    # find relations that are in the remote list but are not in the DB
+    for remobj in remoteObjects:
+        crossref="%d-%s" % (remobj["company"]["id"], remobj["role"])
+
+        if crossref not in foundRemoteObjRef:
+            # the relation in the remote list is not in the DB
+            # hence it needs to be created
+            res={'loc': None, 'rem': remobj}
+            result.append(res)
+
+                    
+    return result
+    
+
