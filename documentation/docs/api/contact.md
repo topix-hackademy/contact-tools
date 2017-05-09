@@ -220,3 +220,9 @@ Example of output:
 returns an array of contacts (max one in normal conditions)
 
     GET /api/v1/contact-by-csid/{old_cs_id}/
+
+
+## GET BY username
+
+
+    GET /api/v1/contact-by-username/{username}/
