@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^company/(?P<id>[0-9]+)/$', views_company.single_company),
 
     url(r'^contact-by-email/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', view_contact.get_contact_by_email),
-    url(r'^contact-by-username/(?P<username>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', view_contact.get_contact_by_username),
+    url(r'^contact-by-username/(?P<username>[\w\s]+)/$', view_contact.get_contact_by_username),
 
     url(r'^company-by-code/(?P<code>\w{0,50})/$', views_company.get_company_by_code),
     url(r'^company-by-csid/(?P<csid>[0-9]+)/$', views_company.get_company_by_csid),
