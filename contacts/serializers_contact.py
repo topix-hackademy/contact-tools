@@ -149,7 +149,8 @@ def auditRelations(localObjects, remoteObjects):
     for locobj in localObjects:
         # use the pair company id and role name to find matches
         localRefFieldValue="%d-%s" % (locobj.company.id, locobj.contact_type.type_name)
-
+        
+        remObjFound = None
         for remobj in remoteObjects_nodupe:
             crossref="%d-%s" % (remobj["company"]["id"], remobj["role"])
 
