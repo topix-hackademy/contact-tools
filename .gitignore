@@ -8,6 +8,7 @@ local_settings.py
 static_root
 contacttools-custom.log
 
+old-files
 ### Django ###
 *.log
 *.pot
