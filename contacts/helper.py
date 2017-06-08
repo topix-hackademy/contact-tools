@@ -12,7 +12,7 @@ def auth_decorator(f):
         try:
 
             auth_token = request.META['HTTP_AUTH_TOKEN']
-            authorized_app = Service.objects.get(token=auth_token)
+            authorized_app = Service.objects.get(token=auth_token, is_valid=True)
             message = "[%s %s] called by %s" % (request.META['REQUEST_METHOD'], request.META['PATH_INFO'],
                                                  authorized_app.service_name )
             logger.info(message)
