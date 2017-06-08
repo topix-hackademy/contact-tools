@@ -78,6 +78,8 @@ class CompanyAdmin(admin.ModelAdmin):
             {'fields': ['company_name', 'company_short_name',
             'company_business_name', 'thumb_logo_display', 'company_logo', 'company_vat_number', 'company_tax_code']}),
 
+        ('Contact Info', {'fields': ['company_phone_number', 'company_website', 'company_email', 'company_certified_email', 'company_fax' ]}),
+
         ('Notes', {'fields': ['company_notes']}),
         
         ('Company Type', {'fields': ['company_type']}),
@@ -87,7 +89,6 @@ class CompanyAdmin(admin.ModelAdmin):
         
         ('Mailing Address', {'fields': ['company_mailingaddress']}),
         
-        ('Contact Info', {'fields': ['company_phone_number', 'company_fax', 'company_website']}),
         
         ('External references', 
             {'fields': ['company_custom_id', 'company_centralservices_id']}),
