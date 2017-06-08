@@ -53,7 +53,7 @@ class ServiceAdmin(admin.ModelAdmin):
             if old_obj.is_valid and not obj.is_valid:
                 # set service not valid
                 obj.delete_date = datetime.datetime.now()
-                obj.token = "INVALID"
+                # obj.token = "INVALID"
             elif not old_obj.is_valid and obj.is_valid:
                 # set service valid
                 obj.delete_date = None

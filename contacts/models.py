@@ -71,6 +71,9 @@ class Company(models.Model):
     company_notes = models.TextField('Notes', null=True, blank=True)
     company_is_valid = models.BooleanField('Is Valid', default=True, null=False, blank=False)
     
+    company_email = models.EmailField('Company general email', max_length=200, null=False, blank=False, unique=False, default="")
+    company_certified_email = models.EmailField('Company certified email', max_length=200, null=False, blank=False, unique=False, default="")
+    
     company_logo = models.ImageField(upload_to='logos/', default=DEFAULT_LOGO_FILE, help_text="Company logo")
     company_logo_thumbnail = ImageSpecField(source='company_logo',
                                       processors=[ResizeToFit(70, 70)],
