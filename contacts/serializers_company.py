@@ -89,4 +89,4 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('id', 'company_custom_id', 'company_centralservices_id', 'company_name', 'company_logo', 'company_short_name', 'company_business_name',
                   'company_vat_number', 'company_tax_code', 'company_email', 'company_certified_email', 'company_address', 'company_cap', 'company_city',
                   'company_province', 'company_country', 'company_mailingaddress', 'company_phone_number', 'company_fax', 'company_website',
-                  'company_notes', 'creation_date', 'company_type', 'contacts')
+                  'company_notes', 'creation_date', 'company_type', 'contacts', 'company_logo_thumbnail', 'company_logo')
