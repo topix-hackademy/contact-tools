@@ -32,6 +32,8 @@ class CompanySerializer(serializers.ModelSerializer):
 
     company_type = CompanyTypeReadSerializer(many=True)
     contacts = serializers.ReadOnlyField()
+    company_logo_thumbnail = serializers.ReadOnlyField(source="company_logo_thumbnail.url")
+    company_logo = serializers.ReadOnlyField(source="company_logo.url")
 
     def __init__(self, *args, **kwargs):
         remove_fields = kwargs.pop('remove_fields', None)
