@@ -133,6 +133,25 @@ class ContactSerializer(serializers.ModelSerializer):
                   'contact_phone', 'contact_phone_secondary', 'contact_notes', 'role', 'contact_centralservices_id')
 
 
+class MiniCompamySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model: Company
+        fields = ('id', 'company_name')
+        extra_kwargs = {'id': {'read_only': True}}
+
+class RelationSerializer(serializers.ModelSerializer):
+    company = MiniCompamySerializer()
+    contact = ContactSerializer()
+    contact_type = ContactTypeSerializer()
+    
+    
+    class Meta:
+        model: CCRelation
+        fields = ('id', 'company', 'contact', 'contact_type')
+        extra_kwargs = {'id': {'read_only': True}}
+
+
 
 def auditRelations(localObjects, remoteObjects):
     result = []

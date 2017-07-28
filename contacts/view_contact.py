@@ -1,5 +1,5 @@
-from .models import Contact
-from .serializers_contact import ContactSerializer
+from .models import Contact, CCRelation
+from .serializers_contact import ContactSerializer, RelationSerializer
 from .helper import auth_decorator
 from rest_framework import status
 from rest_framework.response import Response
@@ -112,4 +112,17 @@ def get_contact_by_csid(request, csid, format=None):
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+@auth_decorator
+def all_relations(request,format=None, *args, **kwargs):
+    """
+    List all snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        relations = CCRelation.objects.all()
+        serializer = RelationSerializer(relations, many=True)
+        return Response(serializer.data)
 

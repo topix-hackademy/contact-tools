@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^company-by-csid/(?P<csid>[0-9]+)/$', views_company.get_company_by_csid),
     url(r'^company-freesearch/(?P<searchstring>[\w\s]+)/$', views_company.get_company_freesearch),
 
+    url(r'^relation/$', view_contact.all_relations),
+
     url(r'^$', views_company.index, name='index'),
 ]
 
