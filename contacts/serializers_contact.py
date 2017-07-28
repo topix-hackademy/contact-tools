@@ -64,12 +64,9 @@ class ContactSerializer(serializers.ModelSerializer):
                                                               instance.contact_last_name)
         instance.contact_email = return_oldvalue_if_empty(validated_data.get('contact_email', ""),
                                                           instance.contact_email)
-        instance.contact_email_secondary = return_oldvalue_if_empty(validated_data.get('contact_email_secondary', ""),
-                                                                    instance.contact_email_secondary)
-        instance.contact_phone = return_oldvalue_if_empty(validated_data.get('contact_phone', ""),
-                                                          instance.contact_phone)
-        instance.contact_phone_secondary = return_oldvalue_if_empty(validated_data.get('contact_phone_secondary', ""),
-                                                                    instance.contact_phone_secondary)
+        instance.contact_email_secondary = validated_data.get('contact_email_secondary', "") 
+        instance.contact_phone = validated_data.get('contact_phone', "")
+        instance.contact_phone_secondary = validated_data.get('contact_phone_secondary', "")
         instance.contact_notes = return_oldvalue_if_empty(validated_data.get('contact_notes', ""),
                                                           instance.contact_notes)
 
