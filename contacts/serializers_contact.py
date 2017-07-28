@@ -133,7 +133,7 @@ class ContactSerializer(serializers.ModelSerializer):
 class MiniCompamySerializer(serializers.ModelSerializer):
     
     class Meta:
-        model: Company
+        model = Company
         fields = ('id', 'company_name')
         extra_kwargs = {'id': {'read_only': True}}
 
@@ -144,7 +144,7 @@ class RelationSerializer(serializers.ModelSerializer):
     
     
     class Meta:
-        model: CCRelation
+        model = CCRelation
         fields = ('id', 'company', 'contact', 'contact_type')
         extra_kwargs = {'id': {'read_only': True}}
 
