@@ -139,7 +139,7 @@ class MiniCompamySerializer(serializers.ModelSerializer):
 
 class RelationSerializer(serializers.ModelSerializer):
     company = MiniCompamySerializer()
-    contact = ContactSerializer()
+    contact = ContactSerializer(remove_fields=['role'])
     contact_type = ContactTypeSerializer()
     
     
