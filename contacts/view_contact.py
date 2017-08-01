@@ -70,7 +70,7 @@ def get_contact_by_email(request, email, format=None):
     Retrieve a contact by email address
     """
     try:
-        contact = Contact.objects.filter(contact_email=email)
+        contact = Contact.objects.filter(Q(contact_email=email) | Q(contact_email_secondary=email))
     except Contact.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
@@ -87,7 +87,7 @@ def get_contact_by_username(request, username, format=None):
     Retrieve a contact by username
     """
     try:
-        contact = Contact.objects.filter(Q(contact_email=email) | Q(contact_email_secondary=email))
+        contact = Contact.objects.filter(contact_username=username)
     except Contact.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
