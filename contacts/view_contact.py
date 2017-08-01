@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
+from django.db.models import Q
 
 import logging
 logger = logging.getLogger('ct-logger')
@@ -79,7 +80,6 @@ def get_contact_by_email(request, email, format=None):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @api_view(['GET'])
 @auth_decorator
 def get_contact_by_username(request, username, format=None):
@@ -87,7 +87,7 @@ def get_contact_by_username(request, username, format=None):
     Retrieve a contact by username
     """
     try:
-        contact = Contact.objects.filter(contact_username=username)
+        contact = Contact.objects.filter(Q(contact_email=email) | Q(contact_email_secondary=email))
     except Contact.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'GET':
@@ -96,20 +96,17 @@ def get_contact_by_username(request, username, format=None):
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        
-        
-        
+
 @api_view(['GET'])
 @auth_decorator
 def get_contact_by_csid(request, csid, format=None):
     """
     Retrieve a contact by Centralservices ID
     """
-    contacts = Contact.objects.filter( contact_centralservices_id=csid ).all()
+    contacts = Contact.objects.filter(contact_centralservices_id=csid).all()
 
     if request.method == 'GET':
         serializer = ContactSerializer(contacts, many=True)
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
-
