@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from .models import Company
+
+from .models import Company, CompanyType
 from .serializers_company import CompanySerializer
 from .helper import auth_decorator
 from rest_framework import status
@@ -22,7 +23,15 @@ def all_companies(request,format=None, *args, **kwargs):
     List all snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        companies = Company.objects.all()
+        query=Q()
+        # check if a filter is provided
+        if 'types' in request.GET and request.GET['types'] and request.GET['types'] != '':
+            type_names=request.GET['types'].split(',')
+            
+            for typename in type_names:
+                query = query | Q(company_type__type_name=typename)
+        
+        companies = Company.objects.filter(query).all()
         serializer = CompanySerializer(companies, many=True,  remove_fields=['contacts'])
         return Response(serializer.data)
 

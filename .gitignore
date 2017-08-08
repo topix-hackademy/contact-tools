@@ -7,6 +7,8 @@ site
 local_settings.py
 static_root
 contacttools-custom.log
+.vagrant
+Vagrantfile
 
 old-files
 ### Django ###
