@@ -138,7 +138,7 @@ class MiniCompanySerializer(serializers.ModelSerializer):
         fields = ('id', 'company_name', 'company_type')
         extra_kwargs = {'id': {'read_only': True}}
     
-    def containedobjects_check_auth(self, obj):
+    def company_type_to_string(self, obj):
         companytypes=[]
         for t in obj.companytype_set.filter(is_valid=True):
             companytypes.append(t.type_name)
