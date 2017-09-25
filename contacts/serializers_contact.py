@@ -130,15 +130,22 @@ class ContactSerializer(serializers.ModelSerializer):
                   'contact_phone', 'contact_phone_secondary', 'contact_notes', 'role', 'contact_centralservices_id')
 
 
-class MiniCompamySerializer(serializers.ModelSerializer):
+class MiniCompanySerializer(serializers.ModelSerializer):
+    company_type=serializers.SerializerMethodField('company_type_to_string')
     
     class Meta:
         model = Company
-        fields = ('id', 'company_name')
+        fields = ('id', 'company_name', 'company_type')
         extra_kwargs = {'id': {'read_only': True}}
+    
+    def containedobjects_check_auth(self, obj):
+        companytypes=[]
+        for t in obj.companytype_set.filter(is_valid=True):
+            companytypes.append(t.type_name)
+        return ", ".join(companytypes)
 
 class RelationSerializer(serializers.ModelSerializer):
-    company = MiniCompamySerializer()
+    company = MiniCompanySerializer()
     contact = ContactSerializer(remove_fields=['role'])
     contact_type = ContactTypeSerializer()
     
