@@ -140,7 +140,7 @@ class MiniCompanySerializer(serializers.ModelSerializer):
     
     def company_type_to_string(self, obj):
         companytypes=[]
-        for t in obj.companytype_set.filter(is_valid=True):
+        for t in obj.company_type.filter(is_valid=True):
             companytypes.append(t.type_name)
         return ", ".join(companytypes)
 
