@@ -235,8 +235,11 @@ class CCRelation(models.Model):
     creation_date = models.DateTimeField('Creation Date', auto_now_add=True)
 
     def __str__(self):
+        contact_type_name='unknown'
+        if self.contact_type:
+            contact_type_name=self.contact_type.type_name
         return self.company.company_short_name + " - " + self.contact.contact_username \
-               + " - " + self.contact_type.type_name
+               + " - " + contact_type_name
 
     class Meta:
         verbose_name_plural = "CCRelations"
