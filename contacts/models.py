@@ -236,10 +236,15 @@ class CCRelation(models.Model):
 
     def __str__(self):
         contact_type_name='unknown'
+        company_short_name=''
+        contact_username=''
         if self.contact_type:
             contact_type_name=self.contact_type.type_name
-        return self.company.company_short_name + " - " + self.contact.contact_username \
-               + " - " + contact_type_name
+        if self.company:
+            company_short_name=self.company.company_short_name
+        if self.contact:
+            contact_username=self.contact.contact_username
+        return company_short_name + " - " + contact_username + " - " + contact_type_name
 
     class Meta:
         verbose_name_plural = "CCRelations"
