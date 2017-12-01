@@ -244,7 +244,7 @@ class CCRelation(models.Model):
             company_short_name=self.company.company_short_name
         if self.contact:
             contact_username=self.contact.contact_username
-        return company_short_name + " - " + contact_username + " - " + contact_type_name
+        return "%s - %s - %s" % (company_short_name, contact_username, contact_type_name)
 
     class Meta:
         verbose_name_plural = "CCRelations"
