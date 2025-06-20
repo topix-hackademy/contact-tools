@@ -73,6 +73,7 @@ class RelationInline(admin.TabularInline):
 
 
 class CompanyAdmin(admin.ModelAdmin):
+    actions = ["export_companies"]
     fieldsets = [
         ('Company Info', 
             {'fields': ['company_name', 'company_short_name',
@@ -100,6 +101,48 @@ class CompanyAdmin(admin.ModelAdmin):
     thumb_logo_display = AdminThumbnail(image_field='get_logo_or_default', template='admin/thumbnail.html')
     thumb_logo_display.short_description = "Company logo"
     inlines = [ RelationInline ]
+    
+    
+    def export_companies(self, request, queryset):
+        result=[]
+        for item in queryset.all():
+            company_types=[]
+            for t in item.companytypes.all():
+                company_types.append(t.type_name)
+            
+            logo_image=""
+            if item.company_logo and item.company_logo.path:
+                logo_image = item.company_logo.path
+            # quick and dirty serializer
+            newitem={
+                "company_custom_id": item.company_custom_id,
+                "company_name": item.company_name,
+                "company_short_name": item.company_short_name,
+                "company_business_name": item.company_business_name,
+                "company_vat_number": item.company_vat_number,
+                "company_tax_code": item.company_tax_code,
+                "company_address": item.company_address,
+                "company_cap": item.company_cap,
+                "company_city": item.company_city,
+                "company_province": item.company_province,
+                "company_country": item.company_country,
+                "company_mailingaddress": item.company_mailingaddress,
+                "company_phone_number": item.company_phone_number,
+                "company_fax": item.company_fax,
+                "company_website": item.company_website,
+                "company_notes": item.company_notes,
+                "company_email": item.company_email,
+                "company_certified_email": item.company_certified_email,
+                "company_logo": logo_image,
+                "company_type": company_types
+            }
+            result.append(newitem)
+            
+            
+            
+        response = HttpResponse(content, content_type='text/json')
+        response['Content-Disposition'] = 'attachment; filename=company_records.json'
+        return response
     
 admin.site.register(Company, CompanyAdmin)
 
