@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.contrib.admin.helpers import ACTION_CHECKBOX_NAME
+from django.http import HttpResponse
 import datetime
+import json
 
 from imagekit.admin import AdminThumbnail
 
@@ -103,11 +106,23 @@ class CompanyAdmin(admin.ModelAdmin):
     inlines = [ RelationInline ]
     
     
+    # override di changelist_view per permettere di eseguire l'azione su tutti gli oggetti
+    # quando non ne viene selezionato alcuno nella lista
+    def changelist_view(self, request, extra_context=None):
+        if 'action' in request.POST and request.POST['action'] == 'export_companies':
+            if not request.POST.getlist(ACTION_CHECKBOX_NAME):
+                post = request.POST.copy()
+                for u in Company.objects.all():
+                    post.update({ACTION_CHECKBOX_NAME: str(u.id)})
+                request._set_post(post)
+        return super(CompanyAdmin, self).changelist_view(request, extra_context)
+    
+    
     def export_companies(self, request, queryset):
         result=[]
         for item in queryset.all():
             company_types=[]
-            for t in item.companytypes.all():
+            for t in item.company_type.all():
                 company_types.append(t.type_name)
             
             logo_image=""
@@ -115,6 +130,7 @@ class CompanyAdmin(admin.ModelAdmin):
                 logo_image = item.company_logo.path
             # quick and dirty serializer
             newitem={
+                "id": item.id,
                 "company_custom_id": item.company_custom_id,
                 "company_name": item.company_name,
                 "company_short_name": item.company_short_name,
@@ -138,7 +154,7 @@ class CompanyAdmin(admin.ModelAdmin):
             }
             result.append(newitem)
             
-            
+        content=json.dumps(result)
             
         response = HttpResponse(content, content_type='text/json')
         response['Content-Disposition'] = 'attachment; filename=company_records.json'
@@ -150,6 +166,8 @@ admin.site.register(Company, CompanyAdmin)
 ### CONTACT ADMIN
 
 class ContactAdmin(admin.ModelAdmin):
+    actions = ["export_contacts"]
+    
     fieldsets = [
         ('Contact Info', {'fields': ['contact_username', 'contact_first_name', 'contact_last_name']}),
         ('Contact Address', {'fields': ['contact_email', 'contact_email_secondary', 'contact_phone', 'contact_phone_secondary']}),
@@ -162,6 +180,49 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ['contact_username', 'contact_email', 'contact_last_name', 'contact_first_name']
     inlines = [ RelationInline ]
     
+
+    # override di changelist_view per permettere di eseguire l'azione su tutti gli oggetti
+    # quando non ne viene selezionato alcuno nella lista
+    def changelist_view(self, request, extra_context=None):
+        if 'action' in request.POST and request.POST['action'] == 'export_contacts':
+            if not request.POST.getlist(ACTION_CHECKBOX_NAME):
+                post = request.POST.copy()
+                for u in Contact.objects.all():
+                    post.update({ACTION_CHECKBOX_NAME: str(u.id)})
+                request._set_post(post)
+        return super(ContactAdmin, self).changelist_view(request, extra_context)
+    
+    
+    def export_contacts(self, request, queryset):
+        result=[]
+        for item in queryset.all():
+            company_relations=[]
+            for r in item.ccrelation_set.all():
+                company_relations.append({ "relation_type": r.contact_type.type_name, "company_id": r.company.id })
+            
+            # quick and dirty serializer
+            newitem={
+                "id": item.id,
+                "contact_username": item.contact_username,
+                "contact_first_name": item.contact_first_name,
+                "contact_last_name": item.contact_last_name,
+                "contact_email": item.contact_email,
+                "contact_email_secondary": item.contact_email_secondary,
+                "contact_phone": item.contact_phone,
+                "contact_phone_secondary": item.contact_phone_secondary,
+                "contact_notes": item.contact_notes,
+                "company_relations": company_relations
+            }
+            result.append(newitem)
+            
+        content=json.dumps(result)
+            
+        response = HttpResponse(content, content_type='text/json')
+        response['Content-Disposition'] = 'attachment; filename=contact_records.json'
+        return response
+
+
+
 
 admin.site.register(Contact, ContactAdmin)
 
