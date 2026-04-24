@@ -53,7 +53,8 @@ class Company(models.Model):
     # this is needed to sync with the old CS
     company_centralservices_id = models.IntegerField('Old Centralservices ID', null=True, blank=True, help_text="ID of this Company in the old CS")
     
-    company_custom_id = models.IntegerField('Custom External ID', null=True, blank=True, help_text="ID of this Company in external systems (eg. ESolver)")
+    #company_custom_id = models.IntegerField('Custom External ID', null=True, blank=True, help_text="ID of this Company in external systems (eg. ESolver)")
+    company_custom_id = models.CharField('Custom External ID', max_length=120, null=True, blank=True, help_text="ID of this Company in external systems (eg. Dynamix)")
     company_name = models.CharField('Company Name', max_length=200, null=False, blank=False)
     company_short_name = models.CharField('Company Short Name', max_length=200, null=True, blank=True)
     company_business_name = models.CharField('Company Business Name', max_length=200, null=True, blank=True)
