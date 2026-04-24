@@ -63,6 +63,7 @@ class CompanySerializer(serializers.ModelSerializer):
         instance.company_name = validated_data.get('company_name', instance.company_name)
         instance.company_short_name = validated_data.get('company_short_name', instance.company_short_name)
         instance.company_business_name = validated_data.get('company_business_name', instance.company_business_name)
+        instance.company_custom_id = validated_data.get('company_custom_id', instance.company_custom_id)
         instance.company_vat_number = validated_data.get('company_vat_number', instance.company_vat_number)
         instance.company_tax_code = validated_data.get('company_tax_code', instance.company_tax_code)
         instance.company_address = validated_data.get('company_address', instance.company_address)
